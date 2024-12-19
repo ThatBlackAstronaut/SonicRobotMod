@@ -1,0 +1,33 @@
+{
+	"geode": "4.0.1",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+    "resources": {
+    	"sprites": [
+    		"resources/modSettings.png"	
+    	],
+        "spritesheets": {
+        	"RobotSprites": [
+        		"resources/robot/sheet/*.png"
+        	]
+        }
+    },
+    "settings": {
+    	"selected-sprite": {
+    		"type": "string",
+    		"name": "Game Sprite",
+    		"description": "Chooses which sonic game sprites' the mod will use. classic1 is Sonic 1, classic2 is Sonic 2, etc! \n\n <cr>Requires level restart to properly apply if changed mid-gameplay.</c>",
+    		"default": "classic1_",
+    		"one-of": ["classic1_", "classic2_", "super2_", "classic3_", "super3_", "mania_", "supermania_", "advance1_", "advance2_", "blaze1_", "blaze2_", "classic1enhanced_", "super1_", "sonic2hd_"]
+    	}
+    },
+	"id": "saritahhh.sonicrobotmod",
+	"name": "Sonic Robot",
+	"version": "v1.0.0",
+	"developer": "Saritahhh",
+	"description": "Mod that turns the robot gamemode into Sonic!"
+}
