@@ -8,13 +8,9 @@
 	},
     "resources": {
     	"sprites": [
-    		"resources/modSettings.png"	
-    	],
-        "spritesheets": {
-        	"RobotSprites": [
-        		"resources/robot/sheet/*.png"
-        	]
-        }
+    		"resources/*.png",
+    		"resources/*.plist"
+    	]
     },
     "settings": {
     	"selected-sprite": {
@@ -29,5 +25,7 @@
 	"name": "Sonic Robot",
 	"version": "v1.0.0",
 	"developer": "Saritahhh",
+	"repository": "https://github.com/DeepRsnanceX/SonicRobotMod",
+	"tags": ["gameplay", "offline"],
 	"description": "Mod that turns the robot gamemode into Sonic!"
 }

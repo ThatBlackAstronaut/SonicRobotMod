@@ -7,6 +7,8 @@ Mod that replaces the robot gamemode (globally, in any level) with a working spr
 The mod's settings contain a selection of a bunch of different sprites from a lot of games, like Sonic 1, 2, 3, Mania, even some from fangames!
 You can access the settings via the mod page or via the game's pause menu.
 
+Use **High Graphics** for best visual results!
+
 ## Credits
 
 - ***SEGA:*** Sonic 1, 2 and 3 sprites.
@@ -16,3 +18,9 @@ You can access the settings via the mod page or via the game's pause menu.
 - ***MrHtuber:*** Super Sonic in Sonic 1 style sprites.
 - ***Madz:*** Blaze Sonic 1 style sprites.
 - ***.Luke:*** Blaze Sonic 3 style sprites.
+
+## Known issues
+
+- Dying repeatedly with very little time in-between deaths can cause sonic to show up even when he shouldn't.
+- Low graphics look bad - i can't and don't wanna bother with MANUALLY porting the sheets, sorry.
+- Ghost trail shows normal robot sprite - will add an option to remove it entirely in robot gamemode later.
