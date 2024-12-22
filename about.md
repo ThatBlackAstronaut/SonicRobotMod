@@ -20,5 +20,4 @@ You can access the settings via the <cy>mod page</c> or via the game's <cp>pause
 ## Known issues
 
 - Dying repeatedly with very little time in-between deaths can cause sonic to show up even when he shouldn't.
-- Low graphics look bad - i can't and don't wanna bother with MANUALLY porting the sheets, sorry.
 - Ghost trail shows normal robot sprite - will add an option to remove it entirely in robot gamemode later.

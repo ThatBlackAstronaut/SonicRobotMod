@@ -58,8 +58,8 @@ class $modify(PlayerObject) {
         return true;
     }
 
-    void update(float dt) {
-        PlayerObject::update(dt);
+    virtual void update(float p0) override {
+        PlayerObject::update(p0);
 
         // Sync rotation
         if (m_fields->m_customSprite && m_mainLayer) {
@@ -127,7 +127,7 @@ class $modify(PlayerObject) {
             }
 
             // update animation frame
-            m_fields->m_animationTimer += dt;
+            m_fields->m_animationTimer += p0;
 
             if (m_fields->m_animationTimer >= frameDuration && m_fields->m_bumpTimer <= 0.1f) {
                 m_fields->m_animationTimer -= frameDuration;
@@ -185,7 +185,7 @@ class $modify(PlayerObject) {
         PlayerObject::doReversePlayer(p0);
     }
 
-    void setVisible(bool visible) {
+    void setVisible(bool visible) override {
         PlayerObject::setVisible(visible);
         if (m_fields->m_customSprite) {
             m_fields->m_customSprite->setVisible(visible);
