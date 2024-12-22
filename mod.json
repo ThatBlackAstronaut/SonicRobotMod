@@ -8,7 +8,9 @@
 	},
     "resources": {
     	"sprites": [
-    		"resources/*.png",
+    		"resources/*.png"
+    	],
+    	"files": [
     		"resources/*.plist"
     	]
     },

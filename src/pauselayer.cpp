@@ -7,19 +7,15 @@ using namespace geode::prelude;
 
 class $modify(MyPauseLayer, PauseLayer) {
     void openModSettings(CCObject*) {
-        // Open the mod settings popup
         geode::openSettingsPopup(Mod::get());
     }
 
     void customSetup() {
-        // Call the original `customSetup` to ensure proper initialization
         PauseLayer::customSetup();
 
-        // Get the window size and existing button menu
         auto winSize = CCDirector::sharedDirector()->getWinSize();
         auto menu = this->getChildByID("left-button-menu");
 
-        // If the menu is not found, create a new one
         if (!menu) {
             menu = CCMenu::create();
             menu->setLayout(
@@ -35,8 +31,7 @@ class $modify(MyPauseLayer, PauseLayer) {
             this->addChild(menu);
         }
 
-        // Create the settings button
-        auto spr = CCSprite::create("modSettings.png"_spr); // Replace with your button's sprite
+        auto spr = CCSprite::create("modSettings.png"_spr);
         auto btn = CCMenuItemSpriteExtra::create(
             spr,
             this,
@@ -44,7 +39,6 @@ class $modify(MyPauseLayer, PauseLayer) {
         );
         spr->setScale(0.7f);
 
-        // Add the button to the menu and update layout
         btn->setPosition({menu->getContentSize().width / 2, btn->getContentSize().height / 2});
         btn->setID("sonic-robot-settings-shortcut"_spr);
         menu->addChild(btn);
