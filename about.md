@@ -19,5 +19,6 @@ You can access the settings via the <cy>mod page</c> or via the game's <cp>pause
 
 ## Known issues
 
+- <cr>***Game crashes on startup with QOLMod & (i think) Prism Menu installed, ON ANDROID.*** - I have 0 clue as to why this happens and don't have neither the tools nor the knowledge to know how to fix this, if anyone that DOES can help, i'll accept any support on fixing this!!</c>
 - Dying repeatedly with very little time in-between deaths can cause sonic to show up even when he shouldn't.
 - Ghost trail shows normal robot sprite - will add an option to remove it entirely in robot gamemode later.

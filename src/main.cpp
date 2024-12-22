@@ -58,7 +58,7 @@ class $modify(PlayerObject) {
         return true;
     }
 
-    virtual void update(float p0) override {
+    void update(float p0) {
         PlayerObject::update(p0);
 
         // Sync rotation
@@ -185,7 +185,7 @@ class $modify(PlayerObject) {
         PlayerObject::doReversePlayer(p0);
     }
 
-    void setVisible(bool visible) override {
+    void setVisible(bool visible) {
         PlayerObject::setVisible(visible);
         if (m_fields->m_customSprite) {
             m_fields->m_customSprite->setVisible(visible);
