@@ -11,8 +11,14 @@
     		"resources/*.png"
     	],
     	"files": [
-    		"resources/*.plist"
-    	]
+    		"resources/presheets/*.plist",
+    		"resources/presheets/*.png"
+    	],
+    	"spritesheets": {
+    		"RobotSprites": [
+    			"resources/robot/sheet/wtf/*.png"
+    		]
+    	}
     },
     "settings": {
     	"selected-sprite": {
