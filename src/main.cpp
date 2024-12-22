@@ -1,5 +1,5 @@
 #include <Geode/Geode.hpp>
-#include <Geode/Modify.hpp>
+#include <Geode/Modify/PlayerObject.hpp>
 #include <Geode/utils/cocos.hpp>
 #include <Geode/loader/SettingV3.hpp>
 #include <cocos2d.h>
