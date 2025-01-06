@@ -96,8 +96,7 @@ class $modify(PlayerObject) {
         }
 
         // idle anim for platformer
-        // this was the whole catalyst for this mod
-        // lol
+        // the whole catalyst for this mod
         if (m_isPlatformer && m_platformerXVelocity == 0 && m_isOnGround) {
 
             std::string frameName = fmt::format("{}sonicIdle_01.png"_spr, chosenGameSprite);
