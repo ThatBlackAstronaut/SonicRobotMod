@@ -22,7 +22,6 @@ class $modify(PlayerObject) {
         bool m_flippedY = false; 
         bool m_isUsingExtendedFrames = false;
         CCSprite* m_customSprite = nullptr;
-        cocos2d::CCNode* m_mainLayer = nullptr;
     };
 
     bool init(int p0, int p1, GJBaseGameLayer* p2, cocos2d::CCLayer* p3, bool p4) {

@@ -16,6 +16,7 @@ You can access the settings via the <cy>mod page</c> or via the game's <cp>pause
 - ***MrHtuber:*** Super Sonic in Sonic 1 style sprites.
 - ***Madz:*** Blaze Sonic 1 style sprites.
 - ***.Luke:*** Blaze Sonic 3 style sprites.
+- [***Sonic 2 HD Team:***](https://sonic2hd.com/staff/) Sonic 2 HD Sprites.
 
 ## Known issues
 
