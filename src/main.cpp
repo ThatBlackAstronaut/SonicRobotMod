@@ -1,14 +1,12 @@
-#include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include <Geode/loader/SettingV3.hpp>
 
 using namespace geode::prelude;
 
 static int maxFrames = 4;
-
 auto chosenGameSprite = Mod::get()->getSettingValue<std::string>("selected-sprite");
 
-$execute {
+$on_mod(Loaded) {
     listenForSettingChanges("selected-sprite", [](std::string value) {
         chosenGameSprite = value;
     });
@@ -24,7 +22,7 @@ class $modify(PlayerObject) {
         bool m_flippedY = false; 
         bool m_isUsingExtendedFrames = false;
         CCSprite* m_customSprite = nullptr;
-        cocos2d::CCNode* m_mainLayer = nullptr; 
+        cocos2d::CCNode* m_mainLayer = nullptr;
     };
 
     bool init(int p0, int p1, GJBaseGameLayer* p2, cocos2d::CCLayer* p3, bool p4) {
