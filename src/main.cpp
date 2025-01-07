@@ -32,7 +32,7 @@ class $modify(PlayerObject) {
         // Change frames depending on what sprite u selected
         // Some sprites need to use 8 frames max
         // Some need only 4
-        if (chosenGameSprite == "mania_" || chosenGameSprite == "advance2_" || chosenGameSprite == "supermania_" || chosenGameSprite == "sonic2hd_") {
+        if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd") {
             fields->m_maxFrames = 8;
             fields->m_isUsingExtendedFrames = true;
         } else {
