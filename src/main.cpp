@@ -44,7 +44,7 @@ class $modify(PlayerObject) {
         m_robotBatchNode->setVisible(false);
 
         // give birth to sonic (real)
-        std::string frameName = fmt::format("{}sonicRun_01.png"_spr, chosenGameSprite);
+        std::string frameName = fmt::format("{}_sonicRun_01.png"_spr, chosenGameSprite);
         fields->m_customSprite = CCSprite::createWithSpriteFrameName(frameName.c_str());
         if (fields->m_customSprite) {
             fields->m_customSprite->setAnchorPoint({0.5f, 0.5f});
@@ -89,7 +89,7 @@ class $modify(PlayerObject) {
         // bump anim for pads
         if (fields->m_bumpTimer > 0.f) {
 
-            std::string frameName = fmt::format("{}sonicBumped_01.png"_spr, chosenGameSprite);
+            std::string frameName = fmt::format("{}_sonicBumped_01.png"_spr, chosenGameSprite);
             fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
             fields->m_bumpTimer -= 0.2f;
             fields->m_animationTimer = 0; 
@@ -100,7 +100,7 @@ class $modify(PlayerObject) {
         // the whole catalyst for this mod
         if (m_isPlatformer && m_platformerXVelocity == 0 && m_isOnGround) {
 
-            std::string frameName = fmt::format("{}sonicIdle_01.png"_spr, chosenGameSprite);
+            std::string frameName = fmt::format("{}_sonicIdle_01.png"_spr, chosenGameSprite);
             fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
             fields->m_animationTimer = 0;
         } else {
@@ -109,7 +109,7 @@ class $modify(PlayerObject) {
             float frameDuration;
 
             if (this->m_isOnGround || this->m_hasGroundParticles) {
-                frameName = fmt::format("{}sonicRun_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
+                frameName = fmt::format("{}_sonicRun_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
                 // change frame times if using extended (8) frames
                 if (fields->m_isUsingExtendedFrames){
                     frameDuration = 1.9f;
@@ -117,7 +117,7 @@ class $modify(PlayerObject) {
                     frameDuration = 2.1f;
                 }
             } else {
-                frameName = fmt::format("{}sonicJump_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
+                frameName = fmt::format("{}_sonicJump_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
                 // change frame times if using extended (8) frames
                 if (fields->m_isUsingExtendedFrames){
                     frameDuration = 0.7f;
@@ -162,7 +162,7 @@ class $modify(PlayerObject) {
     void playerDestroyed(bool p0) {
         PlayerObject::playerDestroyed(p0);
 
-        m_robotBatchNode->setVisible(false);
+        m_fields->m_customSprite->setVisible(false);
     }
 
 //    virtual void setFlipX(bool p0) override {
@@ -198,13 +198,4 @@ class $modify(PlayerObject) {
             fields->m_customSprite->setVisible(visible);
         }
     }
-
-//    void onExit() override {
-//        // cleanup custom sprite
-//        if (m_fields->m_customSprite) {
-//            m_fields->m_customSprite->removeFromParent();
-//            m_fields->m_customSprite = nullptr;
-//        }
-//        PlayerObject::onExit();
-//    }
 };
