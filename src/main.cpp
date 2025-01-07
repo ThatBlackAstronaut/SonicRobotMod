@@ -72,7 +72,7 @@ class $modify(PlayerObject) {
         }
 
         // Check if ur a robot
-        if (!m_isRobot || !m_fields->m_customSprite) {
+        if (!m_isRobot || !fields->m_customSprite) {
             if (fields->m_customSprite) {
                 fields->m_customSprite->setVisible(false);
             }
@@ -84,7 +84,7 @@ class $modify(PlayerObject) {
         m_robotFire->setVisible(false);
         m_robotBurstParticles->setVisible(false);
 
-        m_fields->m_customSprite->setVisible(true);
+        fields->m_customSprite->setVisible(true);
 
         // bump anim for pads
         if (fields->m_bumpTimer > 0.f) {
