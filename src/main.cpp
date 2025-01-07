@@ -114,7 +114,7 @@ class $modify(PlayerObject) {
                 if (fields->m_isUsingExtendedFrames){
                     frameDuration = 1.9f;
                 } else {
-                    frameDuration = 2.1f;
+                    frameDuration = 2.2f; // haha 2.2 lol lmao xd
                 }
             } else {
                 frameName = fmt::format("{}_sonicJump_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
@@ -122,7 +122,7 @@ class $modify(PlayerObject) {
                 if (fields->m_isUsingExtendedFrames){
                     frameDuration = 0.7f;
                 } else {
-                    frameDuration = 1.0f;
+                    frameDuration = 1.3f;
                 }
             }
 
