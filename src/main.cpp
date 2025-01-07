@@ -159,27 +159,23 @@ class $modify(PlayerObject) {
         
     }
 
-    // hide if u die
-    // this kinda doesn't work
-    // so uh
-    // yeah ...
     void playerDestroyed(bool p0) {
         PlayerObject::playerDestroyed(p0);
 
         m_robotBatchNode->setVisible(false);
     }
 
-    virtual void setFlipX(bool p0) override {
-
-        auto fields = m_fields.self();
-
-        if (p0 != fields->m_flippedX) {
-            fields->m_flippedX = p0;
-            fields->m_customSprite->setFlipX(p0); 
-        }
-
-        PlayerObject::setFlipX(p0);
-    }
+//    virtual void setFlipX(bool p0) override {
+//
+//        auto fields = m_fields.self();
+//
+//        if (p0 != fields->m_flippedX) {
+//            fields->m_flippedX = p0;
+//            fields->m_customSprite->setFlipX(p0); 
+//        }
+//
+//        PlayerObject::setFlipX(p0);
+//    }
 
     void doReversePlayer(bool p0) {
 
