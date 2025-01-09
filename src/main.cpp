@@ -175,18 +175,6 @@ class $modify(PlayerObject) {
         m_fields->m_customSprite->setVisible(false);
     }
 
-//    virtual void setFlipX(bool p0) override {
-//
-//        auto fields = m_fields.self();
-//
-//        if (p0 != fields->m_flippedX) {
-//            fields->m_flippedX = p0;
-//            fields->m_customSprite->setFlipX(p0); 
-//        }
-//
-//        PlayerObject::setFlipX(p0);
-//    }
-
     void doReversePlayer(bool p0) {
 
         auto fields = m_fields.self();
