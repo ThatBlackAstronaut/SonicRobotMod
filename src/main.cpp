@@ -40,7 +40,7 @@ class $modify(PlayerObject) {
             fields->m_isUsingExtendedFrames = false;
         }
 
-        // Hide robot node
+        // Hide robot
         m_robotBatchNode->setVisible(false);
 
         // give birth to sonic (real)
@@ -55,6 +55,16 @@ class $modify(PlayerObject) {
         }
 
         return true;
+    }
+
+    void createRobot(int p0) {
+        PlayerObject::createRobot(p0);
+
+        // Hide robot, again
+        // this is only for if separate dual icons or randomize icon on death are installed
+        // VV removing this setvis from init keeps the robot visible if they aren't
+        m_robotBatchNode->setVisible(false);
+        m_robotSprite->setVisible(false);
     }
 
     void update(float p0) {
