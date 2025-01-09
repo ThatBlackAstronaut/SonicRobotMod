@@ -1,4 +1,7 @@
-# v1.0.3
+# v1.0.4
+- Fixed textures (somehow...) missing on medium sometimes.
+
+## v1.0.3
 - Fixed vanilla robot still being visible if Separate Dual Icons, Randomize Icon on Death or both were installed.
 
 ## v1.0.2
