@@ -21,17 +21,29 @@
     	}
     },
     "settings": {
+    	"enable-sonicmod": {
+    		"type": "bool",
+    		"name": "Enable Mod",
+    		"description": "Allows for toggling the mod's functions on/off without the need for disabling the entire mod and restarting the game. \n\n Will need a level restart on change!",
+    		"default": true
+    	},
     	"selected-sprite": {
     		"type": "string",
     		"name": "Game Sprite",
     		"description": "Chooses which sonic game sprites' the mod will use. classic1 is Sonic 1, classic2 is Sonic 2, etc! \n\n <cr>Requires level restart to properly apply if changed mid-gameplay.</c>",
     		"default": "classic1",
     		"one-of": ["classic1", "classic2", "super2", "classic3", "super3", "mania", "supermania", "advance1", "advance2", "blaze1", "blaze2", "classic1enhanced", "super1", "sonic2hd"]
+    	},
+    	"disable-compat": {
+    		"type": "bool",
+    		"name": "Disable Sprite Hiding",
+    		"description": "Disables the compatibility option that explicitly hides the vanilla robot sprites themselves. \n\n This option fixes compatibility with Globed players, but WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death. \n Use carefully! (Default: off)",
+    		"default": false
     	}
     },
 	"id": "saritahhh.sonicrobotmod",
 	"name": "Sonic Robot",
-	"version": "v1.0.4",
+	"version": "v1.0.5",
 	"developer": "Saritahhh",
 	"repository": "https://github.com/DeepRsnanceX/SonicRobotMod",
 	"tags": ["gameplay", "offline"],
