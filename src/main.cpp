@@ -85,6 +85,11 @@ class $modify(PlayerObject) {
 
             auto fields = m_fields.self();
 
+            fields->m_customSprite->setVisible(true);
+
+            m_robotFire->setVisible(false);
+            m_robotBurstParticles->setVisible(false);
+
             // Sync rotation
             if (fields->m_customSprite && m_mainLayer) {
                 fields->m_customSprite->setRotation(m_mainLayer->getRotation());
@@ -101,13 +106,6 @@ class $modify(PlayerObject) {
                 }
                 return;
             }
-
-            // It looks like shit with the fire and particles
-            // so fuck off
-            m_robotFire->setVisible(false);
-            m_robotBurstParticles->setVisible(false);
-
-            fields->m_customSprite->setVisible(true);
 
             // bump anim for pads
             if (fields->m_bumpTimer > 0.f) {
