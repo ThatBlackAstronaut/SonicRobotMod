@@ -12,7 +12,8 @@
     	],
     	"files": [
     		"resources/presheets/*.plist",
-    		"resources/presheets/*.png"
+    		"resources/presheets/*.png",
+    		"resources/sfx/*.ogg"
     	],
     	"spritesheets": {
     		"RobotSprites": [
@@ -33,6 +34,27 @@
     		"description": "Chooses which sonic game sprites' the mod will use. classic1 is Sonic 1, classic2 is Sonic 2, etc! \n\n <cr>Requires level restart to properly apply if changed mid-gameplay.</c>",
     		"default": "classic1",
     		"one-of": ["classic1", "classic2", "super2", "classic3", "super3", "mania", "supermania", "advance1", "advance2", "blaze1", "blaze2", "classic1enhanced", "super1", "sonic2hd"]
+    	},
+    	"enable-sfx": {
+    		"type": "bool",
+    		"name": "Enable SFX",
+    		"description": "Enables playing Sonic sound effects on certain in-game events!",
+    		"enable-if": "enable-sonicmod",
+    		"default": true
+    	},
+    	"global-sfx": {
+    		"type": "bool",
+    		"name": "Global SFX",
+    		"description": "Defines whether or not should sound effects be played regardless of gamemode. If on, Sonic SFX will play on any gamemode, if off (by default) SFX will only play when in Robot gamemode, aka, when Sonic is present.",
+    		"enable-if": "enable-sfx",
+    		"default": false
+    	},
+    	"sfx-set": {
+    		"type": "string",
+    		"name": "Sound Set",
+    		"description": "Chooses which sonic games' sound effects the mod will use on certain events",
+    		"default": "classic",
+    		"one-of": ["classic", "cd"]
     	},
     	"disable-compat": {
     		"type": "bool",

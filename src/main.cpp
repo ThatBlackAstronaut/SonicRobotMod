@@ -4,19 +4,31 @@
 using namespace geode::prelude;
 
 static int maxFrames = 4;
-auto isModEnabled = Mod::get()->getSettingValue<bool>("enable-sonicmod");
 auto chosenGameSprite = Mod::get()->getSettingValue<std::string>("selected-sprite");
 auto isCompatDisabled = Mod::get()->getSettingValue<bool>("disable-compat");
+auto isModEnabled = Mod::get()->getSettingValue<bool>("enable-sonicmod");
+auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
+auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
+auto sfxSet = Mod::get()->getSettingValue<std::string>("sfx-set");
 
 $on_mod(Loaded) {
     listenForSettingChanges("selected-sprite", [](std::string value) {
         chosenGameSprite = value;
+    });
+    listenForSettingChanges("sfx-set", [](std::string value) {
+        sfxSet = value;
     });
     listenForSettingChanges("disable-compat", [](bool value) {
         isCompatDisabled = value;
     });
     listenForSettingChanges("enable-sonicmod", [](bool value) {
         isModEnabled = value;
+    });
+    listenForSettingChanges("enable-sfx", [](bool value) {
+        enableSounds = value;
+    });
+    listenForSettingChanges("global-sfx", [](bool value) {
+        globalSounds = value;
     });
 }
 
@@ -85,11 +97,6 @@ class $modify(PlayerObject) {
 
             auto fields = m_fields.self();
 
-            fields->m_customSprite->setVisible(true);
-
-            m_robotFire->setVisible(false);
-            m_robotBurstParticles->setVisible(false);
-
             // Sync rotation
             if (fields->m_customSprite && m_mainLayer) {
                 fields->m_customSprite->setRotation(m_mainLayer->getRotation());
@@ -106,6 +113,11 @@ class $modify(PlayerObject) {
                 }
                 return;
             }
+
+            fields->m_customSprite->setVisible(true);
+
+            m_robotFire->setVisible(false);
+            m_robotBurstParticles->setVisible(false);
 
             // bump anim for pads
             if (fields->m_bumpTimer > 0.f) {
@@ -164,35 +176,13 @@ class $modify(PlayerObject) {
                 }
             }
 
-        }
-
-        // if i need to add anything else
-        // do it here
-
-    }
-
-    void bumpPlayer(float p0, int p1, bool p2, GameObject* p3) {
-        PlayerObject::bumpPlayer(p0, p1, p2, p3);
-
-        if (isModEnabled) {
-            auto fields = m_fields.self();
-
-            if (m_isRobot && fields->m_customSprite) {
-                fields->m_bumpTimer = 12.5f; 
-            }
+            // if i need to add anything else
+            // do it here
+            // this is INSIDE the if mod is enabled check
 
         }
-        
-    }
 
-    void playerDestroyed(bool p0) {
-        PlayerObject::playerDestroyed(p0);
-
-        if (isModEnabled) {
-
-            m_fields->m_customSprite->setVisible(false);
-
-        }
+        // this is outside the check
 
     }
 
@@ -208,8 +198,88 @@ class $modify(PlayerObject) {
             }
 
         }
+    }
 
+    void bumpPlayer(float p0, int p1, bool p2, GameObject* p3) {
+        PlayerObject::bumpPlayer(p0, p1, p2, p3);
+
+        if (isModEnabled) {
+            auto fields = m_fields.self();
+            auto fmod = FMODAudioEngine::sharedEngine();
+            auto sfxToPlay = fmt::format("{}_spring.ogg"_spr, sfxSet);
+
+            if (m_isRobot && fields->m_customSprite) {
+                fields->m_bumpTimer = 12.5f; 
+            }
+
+            if (enableSounds) {
+                if (!globalSounds){
+                    if (m_isRobot){
+                        fmod->playEffect(sfxToPlay);
+                    }
+                } else {
+                    fmod->playEffect(sfxToPlay);
+                }
+            }
+
+        }
         
+    }
+
+    void playerDestroyed(bool p0) {
+        PlayerObject::playerDestroyed(p0);
+
+        auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(1.2f, {0, -200}) );
+
+        if (isModEnabled) {
+            m_fields->m_customSprite->setVisible(false);
+
+        }
+
+    }
+
+    void startDashing(DashRingObject* p0){
+        PlayerObject::startDashing(p0);
+
+        auto fmod = FMODAudioEngine::sharedEngine();
+        auto sfxToPlayDashStart = fmt::format("{}_startdash.ogg"_spr, sfxSet);
+
+        if (isModEnabled && enableSounds){
+            if (!globalSounds){
+                if (m_isRobot){
+                    fmod->playEffect(sfxToPlayDashStart);
+                }
+            } else {
+                fmod->playEffect(sfxToPlayDashStart);
+            }
+        }
+    }
+
+    void incrementJumps(){
+        PlayerObject::incrementJumps();
+
+        auto fmod = FMODAudioEngine::sharedEngine();
+        auto sfxToPlayJump = fmt::format("{}_jump.ogg"_spr, sfxSet);
+        auto sfxToPlayOrb = fmt::format("{}_orb.ogg"_spr, sfxSet);
+
+        if (isModEnabled && enableSounds && PlayLayer::get()){
+            if (!m_ringJumpRelated){
+                if (m_isRobot){
+                    fmod->playEffect(sfxToPlayJump);
+                }
+            } else {
+                if (m_ringJumpRelated){
+                    if (!globalSounds) {
+                        if (m_isRobot){
+                            fmod->playEffect(sfxToPlayOrb);
+                        }
+                    } else {
+                        fmod->playEffect(sfxToPlayOrb);
+                    }
+                }
+            }
+        }
+
     }
 
     void setVisible(bool visible) {
