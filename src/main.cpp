@@ -54,7 +54,7 @@ class $modify(PlayerObject) {
             // Change frames depending on what sprite u selected
             // Some sprites need to use 8 frames max
             // Some need only 4
-            if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd") {
+            if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "shadow" || chosenGameSprite == "classicshadowsliding") {
                 fields->m_maxFrames = 8;
                 fields->m_isUsingExtendedFrames = true;
             } else {
@@ -70,6 +70,7 @@ class $modify(PlayerObject) {
                 fields->m_customSprite->setPosition(this->getPosition());
                 fields->m_customSprite->setVisible(false);
                 fields->m_customSprite->setID("sonic-anim"_spr);
+                fields->m_customSprite->runAction( CCMoveTo::create(0.0f, {0, 0}) );
                 this->addChild(fields->m_customSprite, 10);
             }
 
@@ -229,10 +230,13 @@ class $modify(PlayerObject) {
     void playerDestroyed(bool p0) {
         PlayerObject::playerDestroyed(p0);
 
+        auto fields = m_fields.self();
+        auto frameName = fmt::format("{}_sonicDeath_01.png"_spr, chosenGameSprite);
         auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(1.2f, {0, -200}) );
 
         if (isModEnabled) {
-            m_fields->m_customSprite->setVisible(false);
+            fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
+            fields->m_customSprite->runAction(deathAnim);
 
         }
 

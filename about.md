@@ -9,7 +9,9 @@ You can access the settings via the <cy>mod page</c> or via the game's <cp>pause
 
 ## <cs>Credits</c>
 
+- [***Prevter:***](https://github.com/Prevter) Massive help in solving the android crashes and overall performance improvements!
 - ***SEGA:*** Sonic 1, 2 and 3 sprites.
+- ***SEGA & Headcannon:*** Amy sprites from Sonic Origins.
 - ***Dimps & Sonic Team:*** Sonic Advance 1 & 2 sprites.
 - ***SEGA, Christian Whitehead, Headcannon, PagodaWest Games, Paul Veer, Kieran Gates & Lucas "Midio" Carvalho:*** Sonic Mania sprites.
 - ***paveldechev0604:*** Sonic 1 enhanced sprites.
@@ -17,7 +19,11 @@ You can access the settings via the <cy>mod page</c> or via the game's <cp>pause
 - ***Madz:*** Blaze Sonic 1 style sprites.
 - ***.Luke:*** Blaze Sonic 3 style sprites.
 - [***Sonic 2 HD Team:***](https://sonic2hd.com/staff/) Sonic 2 HD Sprites.
-- [***Prevter:***](https://github.com/Prevter) Massive help in solving the android crashes and overall performance improvements!
+- ***Notsodevy & Jenny Hound:*** Sonic 1 maniafied sprites.
+- ***facundogomez:*** Sonic 3 custom (maniafied) sprites.
+- ***GPB_XD:*** Sonic 1 revamped sprites.
+- ***Gardow:*** Shadow sprites.
+- ***Cylent Nite:*** Classic Shadow sprites.
 
 ## Known issues
 
