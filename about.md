@@ -22,8 +22,8 @@ You can access the settings via the <cy>mod page</c> or via the game's <cp>pause
 - ***Notsodevy & Jenny Hound:*** Sonic 1 maniafied sprites.
 - ***facundogomez:*** Sonic 3 custom (maniafied) sprites.
 - ***GPB_XD:*** Sonic 1 revamped sprites.
-- ***Gardow:*** Shadow sprites.
-- ***Cylent Nite:*** Classic Shadow sprites.
+- ***Cylent-Nite, AsuharaMoon, Nova-Nebulas & Khalifax10:*** Shadow sprites.
+- ***Cylent-Nite:*** Classic Shadow sprites.
 
 ## Known issues
 

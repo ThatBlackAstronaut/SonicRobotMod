@@ -9,14 +9,19 @@ auto isCompatDisabled = Mod::get()->getSettingValue<bool>("disable-compat");
 auto isModEnabled = Mod::get()->getSettingValue<bool>("enable-sonicmod");
 auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
 auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
-auto sfxSet = Mod::get()->getSettingValue<std::string>("sfx-set");
+auto doIdleAnim = false;
+
+// Individual SFX settings
+auto selectedJumpSound = Mod::get()->getSettingValue<std::string>("jump-sfx");
+auto selectedOrbSound = Mod::get()->getSettingValue<std::string>("orb-sfx");
+auto selectedDashStartSound = Mod::get()->getSettingValue<std::string>("dash-start-sfx");
+auto selectedDashStopSound = Mod::get()->getSettingValue<std::string>("dash-stop-sfx");
+auto selectedPadSound = Mod::get()->getSettingValue<std::string>("pad-sfx");
+auto selectedGravitySound = Mod::get()->getSettingValue<std::string>("gravswitch-sfx");
 
 $on_mod(Loaded) {
     listenForSettingChanges("selected-sprite", [](std::string value) {
         chosenGameSprite = value;
-    });
-    listenForSettingChanges("sfx-set", [](std::string value) {
-        sfxSet = value;
     });
     listenForSettingChanges("disable-compat", [](bool value) {
         isCompatDisabled = value;
@@ -30,6 +35,25 @@ $on_mod(Loaded) {
     listenForSettingChanges("global-sfx", [](bool value) {
         globalSounds = value;
     });
+    // Individual SFX settings
+    listenForSettingChanges("jump-sfx", [](std::string value) {
+        selectedJumpSound = value;
+    });
+    listenForSettingChanges("orb-sfx", [](std::string value) {
+        selectedOrbSound = value;
+    });
+    listenForSettingChanges("dash-start-sfx", [](std::string value) {
+        selectedDashStartSound = value;
+    });
+    listenForSettingChanges("dash-stop-sfx", [](std::string value) {
+        selectedDashStopSound = value;
+    });
+    listenForSettingChanges("pad-sfx", [](std::string value) {
+        selectedPadSound = value;
+    });
+    listenForSettingChanges("gravswitch-sfx", [](std::string value) {
+        selectedGravitySound = value;
+    });
 }
 
 class $modify(PlayerObject) {
@@ -41,6 +65,7 @@ class $modify(PlayerObject) {
         bool m_flippedX = false; 
         bool m_flippedY = false; 
         bool m_isUsingExtendedFrames = false;
+        bool m_isShadow = true; // HE GETS SPECIAL TREATMENT BC HES SO FUCKING COOL
         CCSprite* m_customSprite = nullptr;
     };
 
@@ -54,12 +79,18 @@ class $modify(PlayerObject) {
             // Change frames depending on what sprite u selected
             // Some sprites need to use 8 frames max
             // Some need only 4
-            if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "shadow" || chosenGameSprite == "classicshadowsliding") {
+            if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "classicshadowslide" || chosenGameSprite == "modernsonic") {
                 fields->m_maxFrames = 8;
                 fields->m_isUsingExtendedFrames = true;
             } else {
-                fields->m_maxFrames = 4;
-                fields->m_isUsingExtendedFrames = false;
+                if (chosenGameSprite == "shadow") {
+                    fields->m_maxFrames = 12;
+                    fields->m_isUsingExtendedFrames = true;
+                    fields->m_isShadow = true;
+                } else {
+                    fields->m_maxFrames = 4;
+                    fields->m_isUsingExtendedFrames = false;
+                }
             }
 
             // give birth to sonic (real)
@@ -70,7 +101,6 @@ class $modify(PlayerObject) {
                 fields->m_customSprite->setPosition(this->getPosition());
                 fields->m_customSprite->setVisible(false);
                 fields->m_customSprite->setID("sonic-anim"_spr);
-                fields->m_customSprite->runAction( CCMoveTo::create(0.0f, {0, 0}) );
                 this->addChild(fields->m_customSprite, 10);
             }
 
@@ -146,7 +176,11 @@ class $modify(PlayerObject) {
                     frameName = fmt::format("{}_sonicRun_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
                     // change frame times if using extended (8) frames
                     if (fields->m_isUsingExtendedFrames){
-                        frameDuration = 1.9f;
+                        if (fields->m_isShadow){
+                            frameDuration = 2.2f;
+                        } else {
+                            frameDuration = 1.9f;
+                        }
                     } else {
                         frameDuration = 2.2f; // haha 2.2 lol lmao xd
                     }
@@ -207,7 +241,7 @@ class $modify(PlayerObject) {
         if (isModEnabled) {
             auto fields = m_fields.self();
             auto fmod = FMODAudioEngine::sharedEngine();
-            auto sfxToPlay = fmt::format("{}_spring.ogg"_spr, sfxSet);
+            auto sfxToPlay = fmt::format("{}.ogg"_spr, selectedPadSound);
 
             if (m_isRobot && fields->m_customSprite) {
                 fields->m_bumpTimer = 12.5f; 
@@ -232,9 +266,9 @@ class $modify(PlayerObject) {
 
         auto fields = m_fields.self();
         auto frameName = fmt::format("{}_sonicDeath_01.png"_spr, chosenGameSprite);
-        auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(1.2f, {0, -200}) );
+        auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(0.75f, {0, -200}) );
 
-        if (isModEnabled) {
+        if (isModEnabled && m_isRobot) {
             fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
             fields->m_customSprite->runAction(deathAnim);
 
@@ -246,7 +280,7 @@ class $modify(PlayerObject) {
         PlayerObject::startDashing(p0);
 
         auto fmod = FMODAudioEngine::sharedEngine();
-        auto sfxToPlayDashStart = fmt::format("{}_startdash.ogg"_spr, sfxSet);
+        auto sfxToPlayDashStart = fmt::format("{}.ogg"_spr, selectedDashStartSound);
 
         if (isModEnabled && enableSounds){
             if (!globalSounds){
@@ -259,12 +293,36 @@ class $modify(PlayerObject) {
         }
     }
 
+    // fun fact this is only here
+    // bc this runs once every time u start an attempt
+    // so i use this to reset the position
+    // after the death effect happened
+    void stopDashing(){
+        PlayerObject::stopDashing();
+
+        m_fields->m_customSprite->stopAllActions();
+        m_fields->m_customSprite->setPosition({0,0});
+
+        auto fmod = FMODAudioEngine::sharedEngine();
+        auto sfxToPlayDashStop = fmt::format("{}.ogg"_spr, selectedDashStopSound);
+
+        if (isModEnabled && enableSounds){
+            if (!globalSounds){
+                if (m_isRobot){
+                    fmod->playEffect(sfxToPlayDashStop);
+                }
+            } else {
+                fmod->playEffect(sfxToPlayDashStop);
+            }
+        }
+    }
+
     void incrementJumps(){
         PlayerObject::incrementJumps();
 
         auto fmod = FMODAudioEngine::sharedEngine();
-        auto sfxToPlayJump = fmt::format("{}_jump.ogg"_spr, sfxSet);
-        auto sfxToPlayOrb = fmt::format("{}_orb.ogg"_spr, sfxSet);
+        auto sfxToPlayJump = fmt::format("{}.ogg"_spr, selectedJumpSound);
+        auto sfxToPlayOrb = fmt::format("{}.ogg"_spr, selectedOrbSound);
 
         if (isModEnabled && enableSounds && PlayLayer::get()){
             if (!m_ringJumpRelated){
