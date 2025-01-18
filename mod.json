@@ -20,6 +20,11 @@
     	}
     },
     "settings": {
+    	"main-config-title": {
+    		"type": "title",
+    		"name": "Main Config",
+    		"description": "The mod's main config, enable or disable the mod and set the sprite to use!"
+    	},
     	"enable-sonicmod": {
     		"type": "bool",
     		"name": "Enable Mod",
@@ -32,6 +37,11 @@
     		"description": "Chooses which sonic game sprites' the mod will use. classic1 is Sonic 1, classic2 is Sonic 2, etc! \n\n <cr>Requires level restart to properly apply if changed mid-gameplay.</c>",
     		"default": "classic1",
     		"one-of": ["classic1", "classic2", "tails", "super2", "classic3", "knuckles", "super3", "mania", "supermania", "amy", "advance1", "advance2", "blaze1", "blaze2", "classic1enhanced", "sonic1revamped", "sonic1maniafied", "sonic3maniafied", "modernsonic", "super1", "sonic2hd", "shadow", "classicshadow", "classicshadowslide"]
+    	},
+    	"sfx-config-title": {
+    		"type": "title",
+    		"name": "SFX Configs",
+    		"description": "All configs related to the SFX feature of the mod. Enable, use globally, and customize the sound to use for each event!"
     	},
     	"enable-sfx": {
     		"type": "bool",
@@ -53,13 +63,13 @@
     		"description": "The Sound Effect to play on Robot Jump.",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none", "classic-jump", "cd-jump", "adventure-jump", "generations-jump", "modern-jump", "runners-jump"]
+    		"one-of": ["none", "classic-jump", "cd-jump", "adventure-jump", "generations-jump", "modern-jump", "lostwrld-jump", "lostwrld-jumponly"]
     	},
     	"orb-sfx": {
     		"type": "string",
     		"name": "Orb SFX",
-    		"description": "",
-    		"default": "The Sound Effect to play on Orb use.",
+    		"description": "The Sound Effect to play on Orb use.",
+    		"default": "",
     		"enable-if": "enable-sfx",
     		"one-of": ["none", "classic-monitor-break", "classic-enemy-break", "classic-bumper", "adventure-homingatk", "generations-balloonbreak", "runners-boost", "s3k-electricshieldjump", "heroes-airring", "heroes-boing", "heroes-throw"]
     	},
@@ -85,7 +95,7 @@
     		"description": "The Sound Effect to play when a bump pad is used. (Doesn't play on Spider & Blue pads)",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none", "classic-spring", "cd-spring", "adventure-spring"]
+    		"one-of": ["none", "classic-spring", "cd-spring", "adventure-spring", "modern-spring"]
     	},
     	"gravswitch-sfx": {
     		"type": "string",
@@ -93,7 +103,12 @@
     		"description": "The Sound Effect to play when switching gravity.",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none",]
+    		"one-of": ["none", "heroes-airring", "runners-boost", "adventure-homingatk"]
+    	},
+    	"compat-config-title": {
+    		"type": "title",
+    		"name": "Compatibility Settings",
+    		"description": "Configurations related to ensuring compatibility with other mods.\n\n Read the info for each before changing them so you don't accidentally break anything please!"
     	},
     	"disable-compat": {
     		"type": "bool",

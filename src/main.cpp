@@ -271,9 +271,28 @@ class $modify(PlayerObject) {
         if (isModEnabled && m_isRobot) {
             fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
             fields->m_customSprite->runAction(deathAnim);
-
+            if (!m_isRobot) {
+                fields->m_customSprite->setVisible(false);
+            }
         }
 
+    }
+
+    void flipGravity(bool p0, bool p1) {
+        PlayerObject::flipGravity(p0, p1);
+
+        auto fmod = FMODAudioEngine::sharedEngine();
+        auto sfxToPlayGrav = fmt::format("{}.ogg"_spr, selectedDashStartSound);
+
+        if (isModEnabled && enableSounds){
+            if (!globalSounds){
+                if (m_isRobot){
+                    fmod->playEffect(sfxToPlayGrav);
+                }
+            } else {
+                fmod->playEffect(sfxToPlayGrav);
+            }
+        }
     }
 
     void startDashing(DashRingObject* p0){
@@ -300,19 +319,22 @@ class $modify(PlayerObject) {
     void stopDashing(){
         PlayerObject::stopDashing();
 
-        m_fields->m_customSprite->stopAllActions();
-        m_fields->m_customSprite->setPosition({0,0});
+        if (isModEnabled){
+            auto fields = m_fields.self();
 
-        auto fmod = FMODAudioEngine::sharedEngine();
-        auto sfxToPlayDashStop = fmt::format("{}.ogg"_spr, selectedDashStopSound);
+            fields->m_customSprite->stopAllActions();
+            fields->m_customSprite->setPosition({0,0});
 
-        if (isModEnabled && enableSounds){
-            if (!globalSounds){
-                if (m_isRobot){
+            auto fmod = FMODAudioEngine::sharedEngine();
+            auto sfxToPlayDashStop = fmt::format("{}.ogg"_spr, selectedDashStopSound);
+            if (enableSounds){
+                if (!globalSounds){
+                    if (m_isRobot){
+                        fmod->playEffect(sfxToPlayDashStop);
+                    }
+                } else {
                     fmod->playEffect(sfxToPlayDashStop);
                 }
-            } else {
-                fmod->playEffect(sfxToPlayDashStop);
             }
         }
     }
