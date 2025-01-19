@@ -24,6 +24,7 @@ You can access the settings via the <cy>mod page</c> or via the game's <cp>pause
 - ***GPB_XD:*** Sonic 1 revamped sprites.
 - ***Cylent-Nite, AsuharaMoon, Nova-Nebulas & Khalifax10:*** Shadow sprites.
 - ***Cylent-Nite:*** Classic Shadow sprites.
+- ***Hortinus:*** Modern Sonic sprites.
 
 ## Known issues
 

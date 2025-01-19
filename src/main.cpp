@@ -75,7 +75,7 @@ class $modify(PlayerObject) {
             // Change frames depending on what sprite u selected
             // Some sprites need to use 8 frames max
             // Some need only 4
-            if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "classicshadowslide" || chosenGameSprite == "modernsonic") {
+            if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "classicshadowslide" || chosenGameSprite == "modernsonic" || chosenGameSprite == "maniaknuckles" || chosenGameSprite == "mighty" || chosenGameSprite == "ray") {
                 fields->m_maxFrames = 8;
                 fields->m_isUsingExtendedFrames = true;
             } else {
@@ -113,7 +113,9 @@ class $modify(PlayerObject) {
 
         if (isModEnabled){
             m_robotBatchNode->setVisible(false);
-            m_robotSprite->setVisible(false);
+            if (!isCompatDisabled) {
+                m_robotSprite->setVisible(false);
+            }
         }
     }
 
