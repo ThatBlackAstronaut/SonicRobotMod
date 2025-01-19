@@ -17,7 +17,6 @@ auto selectedOrbSound = Mod::get()->getSettingValue<std::string>("orb-sfx");
 auto selectedDashStartSound = Mod::get()->getSettingValue<std::string>("dash-start-sfx");
 auto selectedDashStopSound = Mod::get()->getSettingValue<std::string>("dash-stop-sfx");
 auto selectedPadSound = Mod::get()->getSettingValue<std::string>("pad-sfx");
-auto selectedGravitySound = Mod::get()->getSettingValue<std::string>("gravswitch-sfx");
 
 $on_mod(Loaded) {
     listenForSettingChanges("selected-sprite", [](std::string value) {
@@ -51,9 +50,6 @@ $on_mod(Loaded) {
     listenForSettingChanges("pad-sfx", [](std::string value) {
         selectedPadSound = value;
     });
-    listenForSettingChanges("gravswitch-sfx", [](std::string value) {
-        selectedGravitySound = value;
-    });
 }
 
 class $modify(PlayerObject) {
@@ -65,7 +61,7 @@ class $modify(PlayerObject) {
         bool m_flippedX = false; 
         bool m_flippedY = false; 
         bool m_isUsingExtendedFrames = false;
-        bool m_isShadow = true; // HE GETS SPECIAL TREATMENT BC HES SO FUCKING COOL
+        bool m_isShadow = false; // HE GETS SPECIAL TREATMENT BC HES SO FUCKING COOL
         CCSprite* m_customSprite = nullptr;
     };
 
@@ -86,7 +82,7 @@ class $modify(PlayerObject) {
                 if (chosenGameSprite == "shadow") {
                     fields->m_maxFrames = 12;
                     fields->m_isUsingExtendedFrames = true;
-                    fields->m_isShadow = true;
+                    fields->m_isShadow = true; // la creatura ... ha llegado
                 } else {
                     fields->m_maxFrames = 4;
                     fields->m_isUsingExtendedFrames = false;
@@ -276,23 +272,6 @@ class $modify(PlayerObject) {
             }
         }
 
-    }
-
-    void flipGravity(bool p0, bool p1) {
-        PlayerObject::flipGravity(p0, p1);
-
-        auto fmod = FMODAudioEngine::sharedEngine();
-        auto sfxToPlayGrav = fmt::format("{}.ogg"_spr, selectedDashStartSound);
-
-        if (isModEnabled && enableSounds){
-            if (!globalSounds){
-                if (m_isRobot){
-                    fmod->playEffect(sfxToPlayGrav);
-                }
-            } else {
-                fmod->playEffect(sfxToPlayGrav);
-            }
-        }
     }
 
     void startDashing(DashRingObject* p0){

@@ -63,7 +63,9 @@
     		"description": "The Sound Effect to play on Robot Jump.",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none", "classic-jump", "cd-jump", "adventure-jump", "generations-jump", "modern-jump", "lostwrld-jump", "lostwrld-jumponly"]
+    		"one-of": ["none",
+    			"classic-jump",
+				"cd-jump"]
     	},
     	"orb-sfx": {
     		"type": "string",
@@ -71,7 +73,11 @@
     		"description": "The Sound Effect to play on Orb use.",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none", "classic-monitor-break", "classic-enemy-break", "classic-bumper", "adventure-homingatk", "generations-balloonbreak", "runners-boost", "s3k-electricshieldjump", "heroes-airring", "heroes-boing", "heroes-throw"]
+    		"one-of": ["none",
+    			"classic-bumper",
+    			"classic-enemy-break",
+				"classic-monitor-break",
+				"s3k-electricshieldjump"]
     	},
     	"dash-start-sfx": {
     		"type": "string",
@@ -79,7 +85,11 @@
     		"description": "The Sound Effect to play when a dash orb is used.",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none", "classic-spindash-release", "cd-peelout", "cd-boost", "runners-boost", "classic-spin", "s3k-boost", "heroes-airring", "heroes-homing", "heroes-throw"]
+    		"one-of": ["none",
+				"classic-spin",
+				"cd-boost",
+				"cd-peelout",
+				"s3k-boost"]
     	},
     	"dash-stop-sfx": {
     		"type": "string",
@@ -87,7 +97,10 @@
     		"description": "The Sound Effect to play when a dash orb is released.",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none", "classic-spindash-release", "classic-suddenstop", "s3k-boost"]
+    		"one-of": ["none",
+				"classic-spindash-release",
+				"classic-suddenstop",
+				"s3k-boost"]
     	},
     	"pad-sfx": {
     		"type": "string",
@@ -95,15 +108,9 @@
     		"description": "The Sound Effect to play when a bump pad is used. (Doesn't play on Spider & Blue pads)",
     		"default": "",
     		"enable-if": "enable-sfx",
-    		"one-of": ["none", "classic-spring", "cd-spring", "adventure-spring", "modern-spring"]
-    	},
-    	"gravswitch-sfx": {
-    		"type": "string",
-    		"name": "Gravity Switch SFX",
-    		"description": "The Sound Effect to play when switching gravity.",
-    		"default": "",
-    		"enable-if": "enable-sfx",
-    		"one-of": ["none", "heroes-airring", "runners-boost", "adventure-homingatk"]
+    		"one-of": ["none",
+				"classic-spring",
+				"cd-spring"]
     	},
     	"compat-config-title": {
     		"type": "title",
