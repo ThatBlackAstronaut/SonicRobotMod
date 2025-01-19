@@ -23,12 +23,12 @@
     	"main-config-title": {
     		"type": "title",
     		"name": "Main Config",
-    		"description": "The mod's main config, enable or disable the mod and set the sprite to use!"
+    		"description": "The mod's <cy>main config</c>, enable or disable the mod and set the sprite to use!"
     	},
     	"enable-sonicmod": {
     		"type": "bool",
-    		"name": "Enable Mod",
-    		"description": "Allows for toggling the mod's functions on/off without the need for disabling the entire mod and restarting the game. \n\n Will need a level restart on change!",
+    		"name": "Enable Mod (READ INFO!!)",
+    		"description": "Allows for <cy>toggling</c> the mod's functions <cg>on</c>/<cr>off</c> without the need for disabling the entire mod and restarting the game. \n\n <co>Will need a level restart on change!</c> \n<cr>Please make sure to restart the level you're playing after switching this setting to avoid issues!!</c>",
     		"default": true
     	},
     	"selected-sprite": {
@@ -69,26 +69,26 @@
     	"sfx-config-title": {
     		"type": "title",
     		"name": "SFX Configs",
-    		"description": "All configs related to the SFX feature of the mod. Enable, use globally, and customize the sound to use for each event!"
+    		"description": "All configs related to the <cy>SFX feature</c> of the mod. <cl>Enable, use globally, and customize the sound to use for each event!</c>"
     	},
     	"enable-sfx": {
     		"type": "bool",
     		"name": "Enable SFX",
-    		"description": "Enables playing Sonic sound effects on certain in-game events!",
+    		"description": "<cg>Enables</c> playing <cl>Sonic sound effects</c> on certain in-game events!",
     		"enable-if": "enable-sonicmod",
     		"default": true
     	},
     	"global-sfx": {
     		"type": "bool",
     		"name": "Global SFX",
-    		"description": "Defines whether or not should sound effects be played regardless of gamemode. If on, Sonic SFX will play on any gamemode, if off (by default) SFX will only play when in Robot gamemode, aka, when Sonic is present.",
+    		"description": "Defines whether or not should sound effects be played <cy>regardless of gamemode</c>.\n\n <cg>If on</c>, Sonic SFX will play on <cp>any gamemode</c>, <cr>if off</c> (by default) SFX will <cj>only play when in Robot gamemode</c>, aka, <cl>when Sonic is present.</c>",
     		"enable-if": "enable-sfx",
     		"default": false
     	},
     	"jump-sfx": {
     		"type": "string",
     		"name": "Jump SFX",
-    		"description": "The Sound Effect to play on Robot Jump.",
+    		"description": "The Sound Effect to play on <cl>Robot Jump.</c>",
     		"default": "",
     		"enable-if": "enable-sfx",
     		"one-of": ["none",
@@ -105,7 +105,7 @@
     	"orb-sfx": {
     		"type": "string",
     		"name": "Orb SFX",
-    		"description": "The Sound Effect to play on Orb use.",
+    		"description": "The Sound Effect to play on <cl>Orb use.</c>",
     		"default": "",
     		"enable-if": "enable-sfx",
     		"one-of": ["none",
@@ -126,7 +126,7 @@
     	"dash-start-sfx": {
     		"type": "string",
     		"name": "Dash Orb Start SFX",
-    		"description": "The Sound Effect to play when a dash orb is used.",
+    		"description": "The Sound Effect to play when <cl>a dash orb is used.</c>",
     		"default": "",
     		"enable-if": "enable-sfx",
     		"one-of": ["none",
@@ -153,7 +153,7 @@
     	"dash-stop-sfx": {
     		"type": "string",
     		"name": "Dash Orb Stop SFX",
-    		"description": "The Sound Effect to play when a dash orb is released.",
+    		"description": "The Sound Effect to play when <cl>a dash orb is released.</c>",
     		"default": "",
     		"enable-if": "enable-sfx",
     		"one-of": ["none",
@@ -166,7 +166,7 @@
     	"pad-sfx": {
     		"type": "string",
     		"name": "Pad SFX",
-    		"description": "The Sound Effect to play when a bump pad is used. (Doesn't play on Spider & Blue pads)",
+    		"description": "The Sound Effect to play when <cl>a bump pad is used.</c> \n\n <co>(Doesn't play on Spider & Blue pads)</c>",
     		"default": "",
     		"enable-if": "enable-sfx",
     		"one-of": ["none",
@@ -183,12 +183,12 @@
     	"compat-config-title": {
     		"type": "title",
     		"name": "Compatibility Settings",
-    		"description": "Configurations related to ensuring compatibility with other mods.\n\n Read the info for each before changing them so you don't accidentally break anything please!"
+    		"description": "Configurations related to <cg>ensuring compatibility with other mods.</c> \n\n <cr>Read the info for each before changing them so you don't accidentally break anything please!</c>"
     	},
     	"disable-compat": {
     		"type": "bool",
     		"name": "Disable Sprite Hiding",
-    		"description": "Disables the compatibility option that explicitly hides the vanilla robot sprites themselves. \n\n This option fixes compatibility with Globed players, but WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death. \n Use carefully! (Default: off)",
+    		"description": "<cr>Disables</c> the compatibility option that explicitly hides the vanilla robot sprites themselves. \n\n <cj>This option</c> <cg>fixes</c> <cj>compatibility with Globed players</c>, but <cr>WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death.</c> \n <cs>Use carefully!</c> (Default: off)",
     		"default": false
     	}
     },

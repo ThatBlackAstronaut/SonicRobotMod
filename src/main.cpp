@@ -225,7 +225,7 @@ class $modify(PlayerObject) {
         if (isModEnabled){
             auto fields = m_fields.self();
 
-            if (p0 != fields->m_flippedX) {
+            if (fields->m_customSprite && p0 != fields->m_flippedX) {
                 fields->m_flippedX = p0;
                 fields->m_customSprite->setFlipX(p0); 
             }
