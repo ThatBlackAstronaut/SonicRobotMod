@@ -23,8 +23,9 @@ Use **High Graphics** for best visual results!
 - ***Notsodevy & Jenny Hound:*** Sonic 1 maniafied sprites.
 - ***facundogomez:*** Sonic 3 custom (maniafied) sprites.
 - ***GPB_XD:*** Sonic 1 revamped sprites.
-- ***Gardow:*** Shadow sprites.
-- ***Cylent Nite:*** Classic Shadow sprites.
+- ***Cylent-Nite, AsuharaMoon, Nova-Nebulas & Khalifax10:*** Shadow sprites.
+- ***Cylent-Nite:*** Classic Shadow sprites.
+- ***Hortinus:*** Modern Sonic sprites.
 
 ## Known issues
 

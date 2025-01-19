@@ -225,9 +225,13 @@ class $modify(PlayerObject) {
         if (isModEnabled){
             auto fields = m_fields.self();
 
-            if (fields->m_customSprite && p0 != fields->m_flippedX) {
-                fields->m_flippedX = p0;
-                fields->m_customSprite->setFlipX(p0); 
+            if (fields->m_customSprite) {
+                if (p0 != fields->m_flippedX) {
+                    fields->m_flippedX = p0;
+                    fields->m_customSprite->setFlipX(p0); 
+                }
+            } else {
+                geode::log::warn("Sonic sprite not found! Please make sure to restart the level after switching the mod's soft-toggle.");
             }
 
         }
