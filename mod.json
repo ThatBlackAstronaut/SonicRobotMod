@@ -114,6 +114,7 @@
     			"classic-enemy-break",
 				"classic-monitor-break",
 				"s3k-electricshieldjump",
+				"adventure-homingatk",
 				"heroes-airring",
 				"heroes-boing",
 				"heroes-throw",
@@ -135,6 +136,7 @@
 				"cd-boost",
 				"cd-peelout",
 				"s3k-boost",
+				"adventure-homingatk",
 				"heroes-airring",
 				"heroes-homing",
 				"heroes-throw",
@@ -189,19 +191,19 @@
     	"disable-compat": {
     		"type": "bool",
     		"name": "Disable Sprite Hiding",
-    		"description": "<cr>Disables</c> the compatibility option that explicitly hides the vanilla robot sprites themselves. \n\n <cj>This option</c> <cg>fixes</c> <cj>compatibility with Globed players</c>, but <cr>WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death.</c> \n <cs>Use carefully!</c> (Default: off)",
+    		"description": "<cr>Disables</c> the compatibility option that explicitly hides the vanilla robot sprites themselves. \n\n <cj>This option</c> <cg>fixes</c> <cj>compatibility with Globed players</c>, but <cr>WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death.</c> \n <cs>Please use carefully!</c> (Default: off)",
     		"default": false
     	},
 		"dynamic-toggle": {
 			"type": "bool",
 			"name": "Allow Dynamic Soft-toggle update",
-			"description": "Allows for the soft toggle to dynamically enable/disable sonic without the need for restarting the level. \n\n <cr>Please note that this option checks for the presence of the Sonic Sprite on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is absolutely too much of a tiring task for you. In which case... \n <cr>Damn.</c>",
+			"description": "Allows for the soft toggle to dynamically enable/disable sonic without the need for restarting the level. \n\n <cr>Please note that this option checks for the presence of the Sonic Sprite on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is too much of a tiring task for you. \n <cs>Please use carefully!</c>",
 			"default": false
 		},
 		"dynamic-frames": {
 			"type": "bool",
 			"name": "Allow Dynamic Max Frame Updating",
-			"description": "Allows for being able to switch sprites in the middle of playing levels and have their max frames amount update live as well, fixing the occasional missing texture issues and having some smoother animations (like mania) not fully playing out as they should. \n\n <cr>Please note that this option sets the max frame times on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is absolutely too much of a tiring task for you. In which case... \n <cr>Damn.</c>",
+			"description": "Allows for being able to switch sprites in the middle of playing levels and have their max frames amount update live as well, fixing the occasional missing texture issues and having some smoother animations (like mania) not fully playing out as they should. \n\n <cr>Please note that this option sets the max frame times on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is too much of a tiring task for you. \n <cs>Please use carefully!</c>",
 			"default": false
 		}
     },
