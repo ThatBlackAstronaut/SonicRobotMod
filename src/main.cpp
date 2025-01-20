@@ -6,6 +6,8 @@ using namespace geode::prelude;
 static int maxFrames = 4;
 auto chosenGameSprite = Mod::get()->getSettingValue<std::string>("selected-sprite");
 auto isCompatDisabled = Mod::get()->getSettingValue<bool>("disable-compat");
+auto dynamicToggle = Mod::get()->getSettingValue<bool>("dynamic-toggle");
+auto dynamicFrames = Mod::get()->getSettingValue<bool>("dynamic-frames");
 auto isModEnabled = Mod::get()->getSettingValue<bool>("enable-sonicmod");
 auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
 auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
@@ -33,6 +35,12 @@ $on_mod(Loaded) {
     });
     listenForSettingChanges("global-sfx", [](bool value) {
         globalSounds = value;
+    });
+    listenForSettingChanges("dynamic-toggle", [](bool value) {
+        dynamicToggle = value;
+    });
+    listenForSettingChanges("dynamic-frames", [](bool value) {
+        dynamicFrames = value;
     });
     // Individual SFX settings
     listenForSettingChanges("jump-sfx", [](std::string value) {
@@ -75,17 +83,19 @@ class $modify(PlayerObject) {
             // Change frames depending on what sprite u selected
             // Some sprites need to use 8 frames max
             // Some need only 4
-            if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "classicshadowslide" || chosenGameSprite == "modernsonic" || chosenGameSprite == "maniaknuckles" || chosenGameSprite == "mighty" || chosenGameSprite == "ray") {
-                fields->m_maxFrames = 8;
-                fields->m_isUsingExtendedFrames = true;
-            } else {
-                if (chosenGameSprite == "shadow") {
-                    fields->m_maxFrames = 12;
+            if (!dynamicFrames){
+                if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "classicshadowslide" || chosenGameSprite == "modernsonic" || chosenGameSprite == "maniaknuckles" || chosenGameSprite == "mighty" || chosenGameSprite == "ray") {
+                    fields->m_maxFrames = 8;
                     fields->m_isUsingExtendedFrames = true;
-                    fields->m_isShadow = true; // la creatura ... ha llegado
                 } else {
-                    fields->m_maxFrames = 4;
-                    fields->m_isUsingExtendedFrames = false;
+                    if (chosenGameSprite == "shadow") {
+                        fields->m_maxFrames = 12;
+                        fields->m_isUsingExtendedFrames = true;
+                        fields->m_isShadow = true; // la creatura ... ha llegado
+                    } else {
+                        fields->m_maxFrames = 4;
+                        fields->m_isUsingExtendedFrames = false;
+                    }
                 }
             }
 
@@ -122,9 +132,53 @@ class $modify(PlayerObject) {
     void update(float p0) {
         PlayerObject::update(p0);
 
+        auto fields = m_fields.self();
+
+        if (dynamicToggle){
+
+            if (isModEnabled && m_robotBatchNode){
+                m_robotBatchNode->setVisible(false);
+            }
+
+            if(!fields->m_customSprite){
+
+                std::string frameName = fmt::format("{}_sonicRun_01.png"_spr, chosenGameSprite);
+                fields->m_customSprite = CCSprite::createWithSpriteFrameName(frameName.c_str());
+                fields->m_customSprite->setAnchorPoint({0.5f, 0.5f});
+                fields->m_customSprite->setPosition({0, 0});
+                fields->m_customSprite->setVisible(false);
+                fields->m_customSprite->setID("sonic-anim"_spr);
+                this->addChild(fields->m_customSprite, 10);
+                
+            }
+
+            if (!isModEnabled && fields->m_customSprite){
+                    m_robotBatchNode->setVisible(true);
+                    m_robotSprite->setVisible(true);
+                    m_robotFire->setVisible(true);
+                    m_robotBurstParticles->setVisible(true);
+                    fields->m_customSprite->setVisible(false);
+                    
+                }
+        }
+
         if(isModEnabled){
 
-            auto fields = m_fields.self();
+            if (dynamicFrames) {
+                if (chosenGameSprite == "mania" || chosenGameSprite == "advance2" || chosenGameSprite == "supermania" || chosenGameSprite == "sonic2hd" || chosenGameSprite == "sonic3maniafied" || chosenGameSprite == "sonic1maniafied" || chosenGameSprite == "classicshadowslide" || chosenGameSprite == "modernsonic" || chosenGameSprite == "maniaknuckles" || chosenGameSprite == "mighty" || chosenGameSprite == "ray") {
+                    fields->m_maxFrames = 8;
+                    fields->m_isUsingExtendedFrames = true;
+                } else {
+                    if (chosenGameSprite == "shadow") {
+                        fields->m_maxFrames = 12;
+                        fields->m_isUsingExtendedFrames = true;
+                        fields->m_isShadow = true; // la creatura ... ha llegado
+                    } else {
+                        fields->m_maxFrames = 4;
+                        fields->m_isUsingExtendedFrames = false;
+                    }
+                }
+            }
 
             // Sync rotation
             if (fields->m_customSprite && m_mainLayer) {

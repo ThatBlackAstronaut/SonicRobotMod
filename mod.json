@@ -1,5 +1,5 @@
 {
-	"geode": "4.1.1",
+	"geode": "4.2.0",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074",
@@ -49,6 +49,7 @@
 				"maniaknuckles",
 				"mighty",
 				"ray",
+				"metal",
 				"amy", 
 				"advance1", 
 				"advance2", 
@@ -190,7 +191,19 @@
     		"name": "Disable Sprite Hiding",
     		"description": "<cr>Disables</c> the compatibility option that explicitly hides the vanilla robot sprites themselves. \n\n <cj>This option</c> <cg>fixes</c> <cj>compatibility with Globed players</c>, but <cr>WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death.</c> \n <cs>Use carefully!</c> (Default: off)",
     		"default": false
-    	}
+    	},
+		"dynamic-toggle": {
+			"type": "bool",
+			"name": "Allow Dynamic Soft-toggle update",
+			"description": "Allows for the soft toggle to dynamically enable/disable sonic without the need for restarting the level. \n\n <cr>Please note that this option checks for the presence of the Sonic Sprite on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is absolutely too much of a tiring task for you. In which case... \n <cr>Damn.</c>",
+			"default": false
+		},
+		"dynamic-frames": {
+			"type": "bool",
+			"name": "Allow Dynamic Max Frame Updating",
+			"description": "Allows for being able to switch sprites in the middle of playing levels and have their max frames amount update live as well, fixing the occasional missing texture issues and having some smoother animations (like mania) not fully playing out as they should. \n\n <cr>Please note that this option sets the max frame times on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is absolutely too much of a tiring task for you. In which case... \n <cr>Damn.</c>",
+			"default": false
+		}
     },
 	"id": "saritahhh.sonicrobotmod",
 	"name": "Sonic Robot",
