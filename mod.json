@@ -28,13 +28,13 @@
     	"enable-sonicmod": {
     		"type": "bool",
     		"name": "Enable Mod (READ INFO!!)",
-    		"description": "Allows for <cy>toggling</c> the mod's functions <cg>on</c>/<cr>off</c> without the need for disabling the entire mod and restarting the game. \n\n <co>Will need a level restart on change!</c> \n<cr>Please make sure to restart the level you're playing after switching this setting to avoid issues!!</c>",
+    		"description": "Allows for <cy>toggling</c> the mod's functions <cg>on</c>/<cr>off</c> without the need for disabling the entire mod and restarting the game. \n\n <co>Will need a level restart on change if</c> <cs>Allow Dynamic Soft-toggle update</c> <co>is disabled</c>! \n<cr>Please make sure to restart the level you're playing after switching this setting to avoid issues!!</c>",
     		"default": true
     	},
     	"selected-sprite": {
     		"type": "string",
     		"name": "Game Sprite (READ INFO)",
-    		"description": "Chooses which sonic game sprites' the mod will use. classic1 is Sonic 1, classic2 is Sonic 2, etc! \n\n <cr>Requires level restart to properly apply if changed mid-gameplay.</c>",
+    		"description": "Chooses which sonic game sprites' the mod will use. classic1 is Sonic 1, classic2 is Sonic 2, etc! \n\n <cr>Requires level restart to properly apply when changed mid-gameplay if</c> <co>Allow Dynamic Max Frame Updating</c> <cr>is disabled</c>",
     		"default": "classic1",
     		"one-of": [
 				"classic1", 
@@ -83,7 +83,7 @@
     		"type": "bool",
     		"name": "Global SFX",
     		"description": "Defines whether or not should sound effects be played <cy>regardless of gamemode</c>.\n\n <cg>If on</c>, Sonic SFX will play on <cp>any gamemode</c>, <cr>if off</c> (by default) SFX will <cj>only play when in Robot gamemode</c>, aka, <cl>when Sonic is present.</c>",
-    		"enable-if": "enable-sfx",
+    		"enable-if": "enable-sfx && enable-sonicmod",
     		"default": false
     	},
     	"jump-sfx": {
@@ -91,7 +91,7 @@
     		"name": "Jump SFX",
     		"description": "The Sound Effect to play on <cl>Robot Jump.</c>",
     		"default": "classic-jump",
-    		"enable-if": "enable-sfx",
+    		"enable-if": "enable-sfx && enable-sonicmod",
     		"one-of": ["none",
     			"classic-jump",
 				"cd-jump",
@@ -108,7 +108,7 @@
     		"name": "Orb SFX",
     		"description": "The Sound Effect to play on <cl>Orb use.</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx",
+    		"enable-if": "enable-sfx && enable-sonicmod",
     		"one-of": ["none",
     			"classic-bumper",
     			"classic-enemy-break",
@@ -130,7 +130,7 @@
     		"name": "Dash Orb Start SFX",
     		"description": "The Sound Effect to play when <cl>a dash orb is used.</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx",
+    		"enable-if": "enable-sfx && enable-sonicmod",
     		"one-of": ["none",
 				"classic-spin",
 				"cd-boost",
@@ -158,7 +158,7 @@
     		"name": "Dash Orb Stop SFX",
     		"description": "The Sound Effect to play when <cl>a dash orb is released.</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx",
+    		"enable-if": "enable-sfx && enable-sonicmod",
     		"one-of": ["none",
 				"classic-spindash-release",
 				"classic-suddenstop",
@@ -171,7 +171,7 @@
     		"name": "Pad SFX",
     		"description": "The Sound Effect to play when <cl>a bump pad is used.</c> \n\n <co>(Doesn't play on Spider & Blue pads)</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx",
+    		"enable-if": "enable-sfx && enable-sonicmod",
     		"one-of": ["none",
 				"classic-spring",
 				"cd-spring",
@@ -192,18 +192,21 @@
     		"type": "bool",
     		"name": "Disable createRobot hiding",
     		"description": "<cr>Disables</c> the compatibility option that hides the robot batch node & sprite in the createRobot function. \n\n <cj>This option</c> <cg>fixes</c> <cj>compatibility with Globed players</c>, but <cr>WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death.</c> \n <cs>Please use carefully!</c> (Default: off)",
+			"enable-if": "enable-sonicmod",
     		"default": false
     	},
 		"dynamic-toggle": {
 			"type": "bool",
 			"name": "Allow Dynamic Soft-toggle update",
 			"description": "Allows for the soft toggle to dynamically enable/disable sonic without the need for restarting the level. \n\n <cr>Please note that this option checks for the presence of the Sonic Sprite on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is too much of a tiring task for you. \n <cs>Please use carefully!</c>",
+			"enable-if": "enable-sonicmod",
 			"default": false
 		},
 		"dynamic-frames": {
 			"type": "bool",
 			"name": "Allow Dynamic Max Frame Updating",
 			"description": "Allows for being able to switch sprites in the middle of playing levels and have their max frames amount update live as well, fixing the occasional missing texture issues and having some smoother animations (like mania) not fully playing out as they should. \n\n <cr>Please note that this option sets the max frame times on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is too much of a tiring task for you. \n <cs>Please use carefully!</c>",
+			"enable-if": "enable-sonicmod",
 			"default": false
 		}
     },
