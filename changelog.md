@@ -11,7 +11,7 @@
     - Added <cs>Tails</c> (Sonic 2)
     - Added <cr>Knuckles</c> (Sonic 3 / 3 & Knuckles)
     - Added <cr>Knuckles</c> (Sonic Mania)
-    - Added <c>Mighty</c> (Sonic Mania Plus)
+    - Added <c-FF0000>Mighty</c> (Sonic Mania Plus)
     - Added <cc>Ray</c> (Sonic Mania Plus)
     - Added <cd>Amy</c> (Sonic Origins Plus)
     - Added <cl>Metal Sonic</c> (Sonic Mania)
