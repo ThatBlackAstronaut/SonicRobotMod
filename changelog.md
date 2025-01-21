@@ -19,8 +19,8 @@
     - Added <cj>Sonic 1 Maniafied</c>
     - Added <cl>Sonic 3 Maniafied</c>
     - Added <cb>Modern Sonic</c>
-    - Added <c>Shadow</c>
-    - Added <c>Classic Shadow</c>
+    - Added <c-910D0D>Shadow</c>
+    - Added <c-910D0D>Classic Shadow</c>
 - <cg>Added</c> a <cy>compatibility setting</c> to <cl>fix Globed players being invisible</c> (off by default for compatibility with Randomize Icon on Death / Separate Dual Icons)
 - <cg>Added</c> a <cy>compatibility setting</c> to <cl>allow the soft-toggle to update live without needing level restart.</c> (off by default to avoid potential performance issues)
 - <cg>Added</c> a <cy>compatibility setting</c> to <cl>allow the max frames amount to update live on sprite change</c>, <cf>fixing the occasional missing texture issues when switching from a higher-frame animation to a lower one</c>, and <cd>fixing higher-frame animations only playing half their frames when switched to from a lower-frame animation.</c> (off by default to avoid potential performance issues)
