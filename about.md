@@ -3,6 +3,7 @@
 Mod that replaces the robot gamemode (globally, in any level) with a working sprite animation of <cl>Sonic The Hedgehog</c>! As well as adding <cy>Sonic Sound Effects</c> that play on certain in-game events, and are massively customizable!
 
 The mod's settings contain a selection of a bunch of different sprites from a lot of games, like Sonic 1, 2, 3, Mania, even some from fangames! As well as containing an extensive selection of Sound Effects that you can choose from for certain game events, ranging all the way from <cj>Classic Games</c> to the <cb>Modern Era</c> Games! Wanna make them play globally or only disable some of them? Can do!
+
 You can access the settings via the <cy>mod page</c> or via the game's <cp>pause menu</c>.
 <cf>Please make sure to access the mod's settings page so you can configure everything to your liking to make your experience as best as it can be!</c>
 
