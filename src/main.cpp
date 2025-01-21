@@ -121,11 +121,10 @@ class $modify(PlayerObject) {
     void createRobot(int p0) {
         PlayerObject::createRobot(p0);
 
-        if (isModEnabled){
+        if (isModEnabled && !isCompatDisabled){
             m_robotBatchNode->setVisible(false);
-            if (!isCompatDisabled) {
-                m_robotSprite->setVisible(false);
-            }
+            m_robotSprite->setVisible(false);
+            
         }
     }
 
@@ -213,7 +212,6 @@ class $modify(PlayerObject) {
             }
 
             // idle anim for platformer
-            // the whole catalyst for this mod
             if (m_isPlatformer && m_platformerXVelocity == 0 && m_isOnGround) {
 
                 std::string frameName = fmt::format("{}_sonicIdle_01.png"_spr, chosenGameSprite);
@@ -285,7 +283,7 @@ class $modify(PlayerObject) {
                     fields->m_customSprite->setFlipX(p0); 
                 }
             } else {
-                geode::log::warn("Sonic sprite not found! Please make sure to restart the level after switching the mod's soft-toggle.");
+                geode::log::warn("Sonic sprite not found! Please make sure to restart the level after switching the mod's soft-toggle or use Allow Dynamic Soft-toggle update.");
             }
 
         }
@@ -351,10 +349,6 @@ class $modify(PlayerObject) {
         }
     }
 
-    // fun fact this is only here
-    // bc this runs once every time u start an attempt
-    // so i use this to reset the position
-    // after the death effect happened
     void stopDashing(){
         PlayerObject::stopDashing();
 

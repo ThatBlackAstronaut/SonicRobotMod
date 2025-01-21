@@ -1,3 +1,6 @@
+# v1.1.1
+- Reworked the compatibility setting to fix Globed robot players being invisible.
+
 # v1.1.0
 - <cg>Added</c> a <cy>Soft-Toggle</c> to the mod so you can more easily toggle the mod on/off without needing to restart the game. (Requires level restart by default)
 - <cg>Added</c> <cj>Sound Effects</c>! (check mod config screen to customize to your liking!)

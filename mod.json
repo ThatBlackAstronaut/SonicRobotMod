@@ -190,8 +190,8 @@
     	},
     	"disable-compat": {
     		"type": "bool",
-    		"name": "Disable Sprite Hiding",
-    		"description": "<cr>Disables</c> the compatibility option that explicitly hides the vanilla robot sprites themselves. \n\n <cj>This option</c> <cg>fixes</c> <cj>compatibility with Globed players</c>, but <cr>WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death.</c> \n <cs>Please use carefully!</c> (Default: off)",
+    		"name": "Disable createRobot hiding",
+    		"description": "<cr>Disables</c> the compatibility option that hides the robot batch node & sprite in the createRobot function. \n\n <cj>This option</c> <cg>fixes</c> <cj>compatibility with Globed players</c>, but <cr>WILL break with mods like Separate Dual Icons and/or Randomize Icon or Death.</c> \n <cs>Please use carefully!</c> (Default: off)",
     		"default": false
     	},
 		"dynamic-toggle": {
@@ -209,7 +209,7 @@
     },
 	"id": "saritahhh.sonicrobotmod",
 	"name": "Sonic Robot",
-	"version": "v1.1.0",
+	"version": "v1.1.0-pre.1",
 	"developer": "Saritahhh",
 	"links": {
 		"source": "https://github.com/DeepRsnanceX/SonicRobotMod"
