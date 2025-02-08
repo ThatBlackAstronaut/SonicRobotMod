@@ -5,12 +5,15 @@ using namespace geode::prelude;
 
 static int maxFrames = 4;
 auto chosenGameSprite = Mod::get()->getSettingValue<std::string>("selected-sprite");
+auto disableInClassic = Mod::get()->getSettingValue<bool>("disable-inclassic");
 auto isCompatDisabled = Mod::get()->getSettingValue<bool>("disable-compat");
 auto dynamicToggle = Mod::get()->getSettingValue<bool>("dynamic-toggle");
 auto dynamicFrames = Mod::get()->getSettingValue<bool>("dynamic-frames");
 auto isModEnabled = Mod::get()->getSettingValue<bool>("enable-sonicmod");
 auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
 auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
+auto sonicBall = Mod::get()->getSettingValue<bool>("sonic-ball");
+auto sonicCube = Mod::get()->getSettingValue<bool>("sonic-cube");
 auto doIdleAnim = false;
 
 // Individual SFX settings
@@ -58,6 +61,16 @@ $on_mod(Loaded) {
     listenForSettingChanges("pad-sfx", [](std::string value) {
         selectedPadSound = value;
     });
+    listenForSettingChanges("disable-inclassic", [](bool value) {
+        disableInClassic = value;
+    });
+    // extra settings
+    listenForSettingChanges("sonic-ball", [](bool value) {
+        sonicBall = value;
+    });
+    listenForSettingChanges("sonic-cube", [](bool value) {
+        sonicCube = value;
+    });
 }
 
 class $modify(PlayerObject) {
@@ -71,6 +84,14 @@ class $modify(PlayerObject) {
         bool m_isUsingExtendedFrames = false;
         bool m_isShadow = false; // HE GETS SPECIAL TREATMENT BC HES SO FUCKING COOL
         CCSprite* m_customSprite = nullptr;
+        CCSprite* m_accuracySprite = nullptr;
+        // stuff for idle animation thingy
+        // its a separate sprite bc im not sure if i can do it with the main sprite lol so i just made a new one for it lol xd lmao haha funny haha xd lmao <- this is a joke btw dont take it seriously <- copilot told me to write this <- copilot
+        CCSprite* m_idleAnim = nullptr;
+        float m_idleAnimTimer = 0.f;
+        int m_maxIdleFrames = 4;
+        int m_currentIdleFrame = 1;
+        // okay but seriously tho i dont know if i can do it with the main sprite so i just made a new one for it
     };
 
     bool init(int p0, int p1, GJBaseGameLayer* p2, cocos2d::CCLayer* p3, bool p4) {
@@ -108,6 +129,10 @@ class $modify(PlayerObject) {
                 fields->m_customSprite->setVisible(false);
                 fields->m_customSprite->setID("sonic-anim"_spr);
                 this->addChild(fields->m_customSprite, 10);
+            }
+
+            if (chosenGameSprite == "classic1" && fields->m_customSprite) {
+                fields->m_idleAnim = CCSprite::createWithSpriteFrameName("classic1_sonicIdle_01.png");
             }
 
             // Hide robot
@@ -188,8 +213,22 @@ class $modify(PlayerObject) {
                 fields->m_customSprite->setFlipY(mainLayerFlippedY);
             }
 
-            // Check if ur a robot
-            if (!m_isRobot || !fields->m_customSprite) {
+            if (sonicBall) {
+                if (m_isBall) {
+                    m_mainLayer->setVisible(false);
+                    this->setRotation(0);
+                } else if (!m_isBall) {
+                    m_mainLayer->setVisible(true);
+                }
+            }
+
+            // Check if ur a robot or ball
+            if ((!m_isRobot && !(m_isBall && sonicBall)) || !fields->m_customSprite) {
+
+                if (sonicBall && !m_isBall) {
+                    m_mainLayer->setVisible(true);
+                }
+
                 if (fields->m_customSprite) {
                     fields->m_customSprite->setVisible(false);
                 }
@@ -197,7 +236,6 @@ class $modify(PlayerObject) {
             }
 
             fields->m_customSprite->setVisible(true);
-
             m_robotFire->setVisible(false);
             m_robotBurstParticles->setVisible(false);
 
@@ -222,7 +260,15 @@ class $modify(PlayerObject) {
                 std::string frameName;
                 float frameDuration;
 
-                if (this->m_isOnGround || this->m_hasGroundParticles) {
+                if (m_isBall && sonicBall) {
+                    frameName = fmt::format("{}_sonicJump_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
+                    // change frame times if using extended (8) frames
+                    if (fields->m_isUsingExtendedFrames){
+                        frameDuration = 0.7f;
+                    } else {
+                        frameDuration = 1.3f;
+                    }
+                } else if (this->m_isOnGround || this->m_hasGroundParticles) {
                     frameName = fmt::format("{}_sonicRun_0{}.png"_spr, chosenGameSprite, fields->m_currentFrame);
                     // change frame times if using extended (8) frames
                     if (fields->m_isUsingExtendedFrames){
@@ -297,6 +343,10 @@ class $modify(PlayerObject) {
             auto fmod = FMODAudioEngine::sharedEngine();
             auto sfxToPlay = fmt::format("{}.ogg"_spr, selectedPadSound);
 
+            if (disableInClassic && !m_isPlatformer) {
+                sfxToPlay = "none.ogg";
+            }
+
             if (m_isRobot && fields->m_customSprite) {
                 fields->m_bumpTimer = 12.5f; 
             }
@@ -322,10 +372,14 @@ class $modify(PlayerObject) {
         auto frameName = fmt::format("{}_sonicDeath_01.png"_spr, chosenGameSprite);
         auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(0.75f, {0, -200}) );
 
-        if (isModEnabled && m_isRobot) {
+        bool sonicBallDie = m_isBall && sonicBall;
+        bool normalDie = isModEnabled && m_isRobot;
+        bool doDieAnim = sonicBallDie || normalDie;
+
+        if (doDieAnim) {
             fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
             fields->m_customSprite->runAction(deathAnim);
-            if (!m_isRobot) {
+            if (!doDieAnim) {
                 fields->m_customSprite->setVisible(false);
             }
         }
@@ -337,6 +391,10 @@ class $modify(PlayerObject) {
 
         auto fmod = FMODAudioEngine::sharedEngine();
         auto sfxToPlayDashStart = fmt::format("{}.ogg"_spr, selectedDashStartSound);
+
+        if (disableInClassic && !m_isPlatformer) {
+            sfxToPlayDashStart = "none.ogg";
+        }
 
         if (isModEnabled && enableSounds){
             if (!globalSounds){
@@ -360,6 +418,11 @@ class $modify(PlayerObject) {
 
             auto fmod = FMODAudioEngine::sharedEngine();
             auto sfxToPlayDashStop = fmt::format("{}.ogg"_spr, selectedDashStopSound);
+
+            if (disableInClassic && !m_isPlatformer) {
+                sfxToPlayDashStop = "none.ogg";
+            }
+
             if (enableSounds){
                 if (!globalSounds){
                     if (m_isRobot){
@@ -378,6 +441,11 @@ class $modify(PlayerObject) {
         auto fmod = FMODAudioEngine::sharedEngine();
         auto sfxToPlayJump = fmt::format("{}.ogg"_spr, selectedJumpSound);
         auto sfxToPlayOrb = fmt::format("{}.ogg"_spr, selectedOrbSound);
+
+        if (disableInClassic && !m_isPlatformer) {
+            sfxToPlayJump = "none.ogg";
+            sfxToPlayOrb = "none.ogg";
+        }
 
         if (isModEnabled && enableSounds && PlayLayer::get()){
             if (!m_ringJumpRelated){

@@ -16,7 +16,10 @@
     	"spritesheets": {
     		"RobotSprites": [
     			"resources/robot/sheet/*.png"
-    		]
+    		],
+			"AccuracyMode": [
+				"resources/robot/shield/*.png"
+			]
     	}
     },
     "settings": {
@@ -86,6 +89,13 @@
     		"enable-if": "enable-sfx && enable-sonicmod",
     		"default": false
     	},
+		"disable-inclassic": {
+			"type": "bool",
+			"name": "Disable SFX in Classic Mode",
+			"description": "Disables the Sonic SFX from playing when in Classic Mode.",
+			"enable-if": "enable-sfx && enable-sonicmod",
+			"default": false
+		},
     	"jump-sfx": {
     		"type": "string",
     		"name": "Jump SFX",
@@ -185,7 +195,7 @@
     	},
     	"compat-config-title": {
     		"type": "title",
-    		"name": "Compatibility Settings",
+    		"name": "Compat & Accessibility",
     		"description": "Configurations related to <cg>ensuring compatibility with other mods.</c> \n\n <cr>Read the info for each before changing them so you don't accidentally break anything please!</c>"
     	},
     	"disable-compat": {
@@ -208,11 +218,37 @@
 			"description": "Allows for being able to switch sprites in the middle of playing levels and have their max frames amount update live as well, fixing the occasional missing texture issues and having some smoother animations (like mania) not fully playing out as they should. \n\n <cr>Please note that this option sets the max frame times on Player Update, so it MIGHT affect performance in some way FOR SOME!!</c> It's recommended to only enable if restarting the level is too much of a tiring task for you. \n <cs>Please use carefully!</c>",
 			"enable-if": "enable-sonicmod",
 			"default": false
+		},
+		"extras-title": {
+			"type": "title",
+			"name": "Extras",
+			"description": "Extra features that can be enabled or disabled to enhance the mod's experience. <cl>Read the info for each before changing them!</c>"
+		},
+		"sonic-ball": {
+			"type": "bool",
+			"name": "Sonic Ball",
+			"description": "Enables the Sonic Ball feature, which will show Sonic's Jump sprite in the ball gamemode.",
+			"enable-if": "enable-sonicmod",
+			"default": false
+		},
+		"sonic-cube": {
+			"type": "bool",
+			"name": "Sonic Cube",
+			"description": "Enables the Sonic Cube feature, which will also show Sonic in the cube gamemode.",
+			"enable-if": "enable-sonicmod",
+			"default": false
+		},
+		"accuracy-mode": {
+			"type": "bool",
+			"name": "Accuracy Mode",
+			"description": "Enables a sprite overlay that will show over Sonic's sprite to help with accuracy in gameplay. \n\n Some may find this to be an unfair advantage, so it's disabled by default. \n <cr>Please use carefully!</c>",
+			"enable-if": "enable-sonicmod",
+			"default": false
 		}
     },
 	"id": "saritahhh.sonicrobotmod",
 	"name": "Sonic Robot",
-	"version": "v1.1.1",
+	"version": "v1.1.2-beta.1",
 	"developer": "Saritahhh",
 	"links": {
 		"source": "https://github.com/DeepRsnanceX/SonicRobotMod"
