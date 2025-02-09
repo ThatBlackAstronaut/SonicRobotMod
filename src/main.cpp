@@ -14,6 +14,7 @@ auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
 auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
 auto sonicBall = Mod::get()->getSettingValue<bool>("sonic-ball");
 auto sonicCube = Mod::get()->getSettingValue<bool>("sonic-cube");
+auto jumpInCube = Mod::get()->getSettingValue<bool>("jumpsfx-incube");
 auto doIdleAnim = false;
 
 // Individual SFX settings
@@ -71,6 +72,9 @@ $on_mod(Loaded) {
     listenForSettingChanges("sonic-cube", [](bool value) {
         sonicCube = value;
     });
+    listenForSettingChanges("jumpsfx-incube", [](bool value) {
+        jumpInCube = value;
+    });
 }
 
 class $modify(PlayerObject) {
@@ -85,6 +89,8 @@ class $modify(PlayerObject) {
         bool m_isShadow = false; // HE GETS SPECIAL TREATMENT BC HES SO FUCKING COOL
         CCSprite* m_customSprite = nullptr;
         CCSprite* m_accuracySprite = nullptr;
+        int m_maxAccuracyFrames = 5;
+        int m_currentAccuracyFrame = 1;
         // stuff for idle animation thingy
         // its a separate sprite bc im not sure if i can do it with the main sprite lol so i just made a new one for it lol xd lmao haha funny haha xd lmao <- this is a joke btw dont take it seriously <- copilot told me to write this <- copilot
         CCSprite* m_idleAnim = nullptr;
@@ -157,6 +163,7 @@ class $modify(PlayerObject) {
         PlayerObject::update(p0);
 
         auto fields = m_fields.self();
+        bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
         if (dynamicToggle){
 
@@ -213,19 +220,26 @@ class $modify(PlayerObject) {
                 fields->m_customSprite->setFlipY(mainLayerFlippedY);
             }
 
-            if (sonicBall) {
-                if (m_isBall) {
+            // Sonic Ball and Cube feature
+            if (sonicBall || (sonicCube && m_isCube)) {
+                if (m_isBall || m_isCube) {
                     m_mainLayer->setVisible(false);
+                    fields->m_customSprite->setVisible(true);
                     this->setRotation(0);
-                } else if (!m_isBall) {
+                } else {
                     m_mainLayer->setVisible(true);
+                    fields->m_customSprite->setVisible(false);
                 }
             }
 
             // Check if ur a robot or ball
-            if ((!m_isRobot && !(m_isBall && sonicBall)) || !fields->m_customSprite) {
+            if ((!m_isRobot && !(m_isBall && sonicBall) && !(m_isCube && sonicCube)) || !fields->m_customSprite) {
 
                 if (sonicBall && !m_isBall) {
+                    m_mainLayer->setVisible(true);
+                }
+
+                if (sonicCube && !m_isCube) {
                     m_mainLayer->setVisible(true);
                 }
 
@@ -342,12 +356,15 @@ class $modify(PlayerObject) {
             auto fields = m_fields.self();
             auto fmod = FMODAudioEngine::sharedEngine();
             auto sfxToPlay = fmt::format("{}.ogg"_spr, selectedPadSound);
+            bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
+            bool validCube = sonicCube && m_isCube;
+            bool doBump = m_isRobot || validCube;
 
             if (disableInClassic && !m_isPlatformer) {
                 sfxToPlay = "none.ogg";
             }
 
-            if (m_isRobot && fields->m_customSprite) {
+            if (doBump && fields->m_customSprite) {
                 fields->m_bumpTimer = 12.5f; 
             }
 
@@ -371,10 +388,12 @@ class $modify(PlayerObject) {
         auto fields = m_fields.self();
         auto frameName = fmt::format("{}_sonicDeath_01.png"_spr, chosenGameSprite);
         auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(0.75f, {0, -200}) );
+        bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
         bool sonicBallDie = m_isBall && sonicBall;
         bool normalDie = isModEnabled && m_isRobot;
-        bool doDieAnim = sonicBallDie || normalDie;
+        bool sonicCubeDie = m_isCube && sonicCube;
+        bool doDieAnim = sonicBallDie || normalDie || sonicCubeDie;
 
         if (doDieAnim) {
             fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
@@ -403,6 +422,20 @@ class $modify(PlayerObject) {
                 }
             } else {
                 fmod->playEffect(sfxToPlayDashStart);
+            }
+        }
+    }
+
+    void flipGravity(bool p0, bool p1) {
+        PlayerObject::flipGravity(p0, p1);
+
+        bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
+
+        if (sonicCube && m_isCube) {
+            if (p0) {
+                this->setScaleY(-1);
+            } else if (!p0) {
+                this->setScaleY(1);
             }
         }
     }
@@ -441,6 +474,7 @@ class $modify(PlayerObject) {
         auto fmod = FMODAudioEngine::sharedEngine();
         auto sfxToPlayJump = fmt::format("{}.ogg"_spr, selectedJumpSound);
         auto sfxToPlayOrb = fmt::format("{}.ogg"_spr, selectedOrbSound);
+        bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
         if (disableInClassic && !m_isPlatformer) {
             sfxToPlayJump = "none.ogg";
@@ -450,6 +484,10 @@ class $modify(PlayerObject) {
         if (isModEnabled && enableSounds && PlayLayer::get()){
             if (!m_ringJumpRelated){
                 if (m_isRobot){
+                    fmod->playEffect(sfxToPlayJump);
+                }
+                // Sonic Cube jump SFX
+                if (sonicCube && m_isCube && jumpInCube) {
                     fmod->playEffect(sfxToPlayJump);
                 }
             } else {

@@ -238,6 +238,13 @@
 			"enable-if": "enable-sonicmod",
 			"default": false
 		},
+		"jumpsfx-incube": {
+			"type": "bool",
+			"name": "Jump SFX in Cube",
+			"description": "Enables the Jump SFX to play in the cube gamemode if Sonic Cube is enabled. \n\n <cr>Although mostly functional, rotation can mess up some times, mainly when rotating gameplay. This feature is still experimental. Use carefully and be advised!</c>",
+			"enable-if": "sonic-cube && enable-sfx",
+			"default": false
+		},
 		"accuracy-mode": {
 			"type": "bool",
 			"name": "Accuracy Mode",
