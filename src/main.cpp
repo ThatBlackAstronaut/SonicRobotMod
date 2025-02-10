@@ -431,13 +431,6 @@ class $modify(PlayerObject) {
 
         bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
-        geode::log::debug("Flip state p0 is: {}", p0);
-        geode::log::debug("Flip state p1 is: {}", p1);
-        geode::log::debug("m_isUpsideDown is: {}", m_isUpsideDown);
-        geode::log::debug("m_isSideways is: {}", m_isSideways);
-        geode::log::debug("m_vehicleSize is: {}", m_vehicleSize);
-        geode::log::debug("------------------------");
-
         if (sonicCube && m_isCube) {
             float scaleX = m_vehicleSize;
             float scaleY = m_vehicleSize;
