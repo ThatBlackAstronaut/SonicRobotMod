@@ -431,11 +431,33 @@ class $modify(PlayerObject) {
 
         bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
+        geode::log::debug("Flip state p0 is: {}", p0);
+        geode::log::debug("Flip state p1 is: {}", p1);
+        geode::log::debug("m_isUpsideDown is: {}", m_isUpsideDown);
+        geode::log::debug("m_isSideways is: {}", m_isSideways);
+        geode::log::debug("m_vehicleSize is: {}", m_vehicleSize);
+        geode::log::debug("------------------------");
+
         if (sonicCube && m_isCube) {
-            if (p0) {
-                this->setScaleY(-1);
-            } else if (!p0) {
-                this->setScaleY(1);
+            float scaleX = m_vehicleSize;
+            float scaleY = m_vehicleSize;
+
+            if (m_isUpsideDown && m_isSideways) {
+                // Right (rotated 90deg)
+                this->setScaleX(scaleX);
+                this->setScaleY(scaleY);
+            } else if (!m_isUpsideDown && m_isSideways) {
+                // Left (rotated -90deg)
+                this->setScaleX(-scaleX);
+                this->setScaleY(scaleY);
+            } else if (m_isUpsideDown && !m_isSideways) {
+                // Upside down
+                this->setScaleX(scaleX);
+                this->setScaleY(-scaleY);
+            } else {
+                // Normal
+                this->setScaleX(scaleX);
+                this->setScaleY(scaleY);
             }
         }
     }
