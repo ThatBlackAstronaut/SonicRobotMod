@@ -236,7 +236,7 @@
 			"name": "Sonic Cube",
 			"enable-if": "enable-sonicmod",
 			"default": false,
-			"description": "Enables the Sonic Cube feature, which will also show Sonic in the cube gamemode. \n\n <cr>Although mostly functional, might cause some issues if enabled, aside from being overall confusing, since there won't be any noticeable difference between cube and Robot.</c> \n\n <cs>Use at your own risk!</c>"
+			"description": "Enables the Sonic Cube feature, which will also show Sonic in the cube gamemode. \n\n <cr>Although mostly functional, might cause some issues if enabled (mainly with player rotations on some very specific situations), aside from being overall confusing, since there won't be any noticeable difference between cube and Robot.</c> \n\n <cs>Use at your own risk!</c>"
 		},
 		"jumpsfx-incube": {
 			"type": "bool",

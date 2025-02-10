@@ -1,8 +1,12 @@
-# v1.1.1
+# v1.1.2
+- <cg>Added</c> Sonic Ball extra feature.
+- <cg>Added</c> Sonic Cube extra feature.
+
+## v1.1.1
 - Reworked the compatibility setting to fix Globed robot players being invisible.
 - Re-aligned sprites to be more accurate to the hitbox.
 
-# v1.1.0
+## v1.1.0
 - <cg>Added</c> a <cy>Soft-Toggle</c> to the mod so you can more easily toggle the mod on/off without needing to restart the game. (Requires level restart by default)
 - <cg>Added</c> <cj>Sound Effects</c>! (check mod config screen to customize to your liking!)
 - <cg>Added</c> <cj>Global Sound Effects</c> setting. (off by default)

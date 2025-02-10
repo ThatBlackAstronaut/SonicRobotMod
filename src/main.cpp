@@ -225,7 +225,14 @@ class $modify(PlayerObject) {
                 if (m_isBall || m_isCube) {
                     m_mainLayer->setVisible(false);
                     fields->m_customSprite->setVisible(true);
-                    this->setRotation(0);
+                    if (m_isCube && sonicCube) {
+                        this->setRotation(0);
+                    }
+
+                    if (m_isBall && sonicBall) {
+                        this->setRotation(0);
+                    }
+                    
                 } else {
                     m_mainLayer->setVisible(true);
                     fields->m_customSprite->setVisible(false);
