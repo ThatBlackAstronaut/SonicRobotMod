@@ -227,35 +227,28 @@
 		"sonic-ball": {
 			"type": "bool",
 			"name": "Sonic Ball",
-			"description": "Enables the Sonic Ball feature, which will show Sonic's Jump sprite in the ball gamemode.",
+			"description": "Enables the Sonic Ball feature, which will show your currently selected character's rolling sprite in the ball gamemode!",
 			"enable-if": "enable-sonicmod",
 			"default": false
 		},
 		"sonic-cube": {
 			"type": "bool",
 			"name": "Sonic Cube",
-			"description": "Enables the Sonic Cube feature, which will also show Sonic in the cube gamemode.",
 			"enable-if": "enable-sonicmod",
-			"default": false
+			"default": false,
+			"description": "Enables the Sonic Cube feature, which will also show Sonic in the cube gamemode. \n\n <cr>Although mostly functional, might cause some issues if enabled, aside from being overall confusing, since there won't be any noticeable difference between cube and Robot.</c> \n\n <cs>Use at your own risk!</c>"
 		},
 		"jumpsfx-incube": {
 			"type": "bool",
 			"name": "Jump SFX in Cube",
-			"description": "Enables the Jump SFX to play in the cube gamemode if Sonic Cube is enabled.",
 			"enable-if": "sonic-cube && enable-sfx",
-			"default": false
-		},
-		"accuracy-mode": {
-			"type": "bool",
-			"name": "Accuracy Mode",
-			"description": "Enables a sprite overlay that will show over Sonic's sprite to help with accuracy in gameplay. \n\n Some may find this to be an unfair advantage, so it's disabled by default. \n <cr>Please use carefully!</c>",
-			"enable-if": "enable-sonicmod",
+			"description": "Enables the Jump SFX to play in the cube gamemode if Sonic Cube is enabled. \n\n <cr>Can, obviously, get very annoying to hear the sound THAT much. Up to you if you want to enable it!</c>",
 			"default": false
 		}
     },
 	"id": "saritahhh.sonicrobotmod",
 	"name": "Sonic Robot",
-	"version": "v1.1.2-beta.1",
+	"version": "v1.1.2",
 	"developer": "Saritahhh",
 	"links": {
 		"source": "https://github.com/DeepRsnanceX/SonicRobotMod"
