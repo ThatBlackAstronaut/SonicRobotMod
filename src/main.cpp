@@ -88,16 +88,16 @@ class $modify(PlayerObject) {
         bool m_isUsingExtendedFrames = false;
         bool m_isShadow = false; // HE GETS SPECIAL TREATMENT BC HES SO FUCKING COOL
         CCSprite* m_customSprite = nullptr;
-        CCSprite* m_accuracySprite = nullptr;
-        int m_maxAccuracyFrames = 5;
-        int m_currentAccuracyFrame = 1;
+        //CCSprite* m_accuracySprite = nullptr;
+        //int m_maxAccuracyFrames = 5;
+        //int m_currentAccuracyFrame = 1;
+
         // stuff for idle animation thingy
         // its a separate sprite bc im not sure if i can do it with the main sprite lol so i just made a new one for it lol xd lmao haha funny haha xd lmao <- this is a joke btw dont take it seriously <- copilot told me to write this <- copilot
         CCSprite* m_idleAnim = nullptr;
         float m_idleAnimTimer = 0.f;
         int m_maxIdleFrames = 4;
         int m_currentIdleFrame = 1;
-        // okay but seriously tho i dont know if i can do it with the main sprite so i just made a new one for it
     };
 
     bool init(int p0, int p1, GJBaseGameLayer* p2, cocos2d::CCLayer* p3, bool p4) {
