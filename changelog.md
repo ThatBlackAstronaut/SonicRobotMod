@@ -6,13 +6,14 @@
     - <cg>Added</c> <cj>Jump SFX in Cube:</c> Complementary to Sonic Cube mode, allows for the Jump SFX to be played on cube jumps! (Disabled by default)
 - <cg>Added</c> an option to entirely <cy>Disable SFX in Classic Mode</c>
 - <cg>Added</c> a couple new <cy>Sound Effects</c> to select from.
+- Slightly <cy>tweaked frame times for low-frame animations.</c>
 - Unfortunately, <cr>removed android32 support as the mod just wasn't functional there.</c>
 
-## v1.1.1
+# v1.1.1
 - Reworked the compatibility setting to fix Globed robot players being invisible.
 - Re-aligned sprites to be more accurate to the hitbox.
 
-## v1.1.0
+# v1.1.0
 - <cg>Added</c> a <cy>Soft-Toggle</c> to the mod so you can more easily toggle the mod on/off without needing to restart the game. (Requires level restart by default)
 - <cg>Added</c> <cj>Sound Effects</c>! (check mod config screen to customize to your liking!)
 - <cg>Added</c> <cj>Global Sound Effects</c> setting. (off by default)
@@ -36,19 +37,19 @@
 - <cg>Added</c> a <cy>compatibility setting</c> to <cl>allow the soft-toggle to update live without needing level restart.</c> (off by default to avoid potential performance issues)
 - <cg>Added</c> a <cy>compatibility setting</c> to <cl>allow the max frames amount to update live on sprite change</c>, <cf>fixing the occasional missing texture issues when switching from a higher-frame animation to a lower one</c>, and <cd>fixing higher-frame animations only playing half their frames when switched to from a lower-frame animation.</c> (off by default to avoid potential performance issues)
 
-## v1.0.4
+# v1.0.4
 - Fixed textures (somehow...) missing on medium sometimes.
 
-## v1.0.3
+# v1.0.3
 - Fixed vanilla robot still being visible if Separate Dual Icons, Randomize Icon on Death or both were installed.
 
-## v1.0.2
+# v1.0.2
 - Fixed android crashes. (Thank you [Prevter!](https://github.com/Prevter))
 - General performance improvements. (Again, thank you [Prevter!](https://github.com/Prevter))
 - Slight adjustments to the option selection.
 
-## v1.0.1
+# v1.0.1
 - Fixed lower qualities.
 
-## v1.0.0
+# v1.0.0
 - Initial release.
