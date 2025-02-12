@@ -6,6 +6,7 @@
     - <cg>Added</c> <cj>Jump SFX in Cube:</c> Complementary to Sonic Cube mode, allows for the Jump SFX to be played on cube jumps! (Disabled by default)
 - <cg>Added</c> an option to entirely <cy>Disable SFX in Classic Mode</c>
 - <cg>Added</c> a couple new <cy>Sound Effects</c> to select from.
+- Unfortunately, <cr>removed android32 support as the mod just wasn't functional there.</c>
 
 ## v1.1.1
 - Reworked the compatibility setting to fix Globed robot players being invisible.

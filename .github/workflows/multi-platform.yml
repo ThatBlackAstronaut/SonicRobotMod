@@ -18,9 +18,14 @@ jobs:
         - name: macOS
           os: macos-latest
 
-        - name: Android32
-          os: ubuntu-latest
-          target: Android32
+        # goodnight, sweet prince
+        # i am NOT bothering with fixing android32
+        # like 3 ppl use it anyways
+        # so rip
+
+        #- name: Android32
+        #  os: ubuntu-latest
+        #  target: Android32
 
         - name: Android64
           os: ubuntu-latest
