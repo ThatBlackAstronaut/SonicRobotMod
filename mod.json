@@ -111,7 +111,8 @@
 				"modern-spin",
 				"generations-jump",
 				"lostwrld-jump",
-				"lostwrld-jumponly"]
+				"lostwrld-jumponly",
+				"runners-jump"]
     	},
     	"orb-sfx": {
     		"type": "string",
@@ -133,7 +134,8 @@
 				"modern-lightdash",
 				"modern-railcontact",
 				"generations-balloonbreak",
-				"lostwrld-homing"]
+				"lostwrld-homing",
+				"runners-doublejump"]
     	},
     	"dash-start-sfx": {
     		"type": "string",
@@ -173,8 +175,12 @@
 				"classic-spindash-release",
 				"classic-suddenstop",
 				"s3k-boost",
+				"heroes-airring",
 				"modern-railcontact",
-				"generations-spinrelease"]
+				"generations-spinrelease",
+				"modern-dashring",
+				"modern-lightdash",
+				"runners-doublejump"]
     	},
     	"pad-sfx": {
     		"type": "string",

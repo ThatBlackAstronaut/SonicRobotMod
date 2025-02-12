@@ -1,6 +1,11 @@
 # v1.1.2
-- <cg>Added</c> Sonic Ball extra feature.
-- <cg>Added</c> Sonic Cube extra feature.
+
+- <cg>Added</c> new <cy>Extra Settings!</c>
+    - <cg>Added</c> <cj>Sonic Ball:</c> Shows Sonic's rolling sprite when in the ball gamemode! (Disabled by default)
+    - <cg>Added</c> <cj>Sonic Cube:</c> Allows Sonic to replace the Cube gamemode too! Visually works the same as the Robot mode, animations and all! (Disabled by default)
+    - <cg>Added</c> <cj>Jump SFX in Cube:</c> Complementary to Sonic Cube mode, allows for the Jump SFX to be played on cube jumps! (Disabled by default)
+- <cg>Added</c> an option to entirely <cy>Disable SFX in Classic Mode</c>
+- <cg>Added</c> a couple new <cy>Sound Effects</c> to select from.
 
 ## v1.1.1
 - Reworked the compatibility setting to fix Globed robot players being invisible.
