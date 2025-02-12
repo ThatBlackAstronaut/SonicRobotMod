@@ -225,7 +225,7 @@
 		"extras-title": {
 			"type": "title",
 			"name": "Extras",
-			"description": "Extra features that can be enabled or disabled to enhance the mod's experience. <cl>Read the info for each before changing them!</c>"
+			"description": "Extra features that can be enabled or disabled to enhance the mod's experience. \n <cl>Read the info for each before changing them!</c> \n\n <cr>Please note that any and all compatibility issues with these features are not guaranteed to be fixed, and might not be fixed at all since they're not part of the main mod focus, so use at your own risk!</c>"
 		},
 		"sonic-ball": {
 			"type": "bool",
