@@ -16,10 +16,7 @@
     	"spritesheets": {
     		"RobotSprites": [
     			"resources/robot/sheet/*.png"
-    		],
-			"AccuracyMode": [
-				"resources/robot/shield/*.png"
-			]
+    		]
     	}
     },
     "settings": {
