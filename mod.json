@@ -18,7 +18,7 @@
     		"RobotSprites": [
     			"resources/robot/sheet/*.png"
     		],
-			"RankSheet":[
+			"UnleashedSheet":[
 				"resources/rankings/*.png"
 			]
     	}
@@ -270,7 +270,7 @@
     },
 	"id": "saritahhh.sonicrobotmod",
 	"name": "Sonic Robot",
-	"version": "v1.1.2",
+	"version": "v1.1.3",
 	"developer": "Saritahhh",
 	"links": {
 		"source": "https://github.com/DeepRsnanceX/SonicRobotMod"

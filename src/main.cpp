@@ -626,6 +626,7 @@ class $modify(PlayerObject) {
     }
 
     void updateTimeMod(float p0, bool p1) {
+        
         PlayerObject::updateTimeMod(p0, p1);
 
         if (unleashedSounds && PlayLayer::get()) {
@@ -635,7 +636,7 @@ class $modify(PlayerObject) {
 
             int doPlaySound = genRandomInt(1, 10);
 
-            if (p0 >= 1.2f) {
+            if (p0 >= 1.5f) {
                 fmod->playEffect("modern-fullboost.ogg"_spr);
                 if (doPlaySound >= 3) {
                     fmod->playEffect(sfxToPlayBoost);
