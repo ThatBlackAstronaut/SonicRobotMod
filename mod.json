@@ -1,5 +1,5 @@
 {
-	"geode": "4.2.0",
+	"geode": "4.3.1",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074",
@@ -11,16 +11,12 @@
     		"resources/*.png"
     	],
     	"files": [
-    		"resources/sfx/*.ogg",
-			"resources/sfx/unleashed/*.ogg"
+    		"resources/sfx/*.ogg"
     	],
     	"spritesheets": {
     		"RobotSprites": [
     			"resources/robot/sheet/*.png"
-    		],
-			"UnleashedSheet":[
-				"resources/rankings/*.png"
-			]
+    		]
     	}
     },
     "settings": {
@@ -68,7 +64,8 @@
 				"sonic2hd", 
 				"shadow", 
 				"classicshadow", 
-				"classicshadowslide"
+				"classicshadowslide",
+				"unleashedjava"
 			]
     	},
     	"sfx-config-title": {
@@ -154,7 +151,6 @@
 				"heroes-homing",
 				"heroes-throw",
 				"modern-boost",
-				"modern-fullboost",
 				"modern-dashpanel",
 				"modern-dashring",
 				"modern-homingatk",
@@ -252,20 +248,6 @@
 			"enable-if": "sonic-cube && enable-sfx",
 			"description": "Enables the Jump SFX to play in the cube gamemode if Sonic Cube is enabled. \n\n <cr>Can, obviously, get very annoying to hear the sound THAT much. Up to you if you want to enable it!</c>",
 			"default": false
-		},
-		"unleashed-sfx": {
-			"type": "bool",
-			"name": "Sonic Unleashed SFX",
-			"enable-if": "enable-sfx && enable-sonicmod",
-			"description": "If enabled, randomly plays some SFX from Sonic Unleashed at certain game events, such as changing speed, dash orb use, jumping, and more! \n\n Play Sonic Unleashed Recompiled. NOW.",
-			"default": true
-		},
-		"unleashed-rankings":{
-			"type": "bool",
-			"name": "Sonic Unleashed Rankings",
-			"enable-if": "enable-sonicmod",
-			"default": false,
-			"description": "If enabled, will play Sonic's lines from Sonic Unleashed that he says for different rankings on level complete. A different line will play depending on how many attempts you did! \n\n Play Sonic Unleashed Recompiled. NOW."
 		}
     },
 	"id": "saritahhh.sonicrobotmod",

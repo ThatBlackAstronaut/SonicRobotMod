@@ -9,7 +9,6 @@ project(SonicRobotMod VERSION 1.1.3)
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp
     src/pauselayer.cpp
-    src/speedmeter.cpp
     # Add any extra C++ source files here
 )
 
