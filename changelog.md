@@ -1,3 +1,6 @@
+# v1.1.3
+- <cg>Added</c> <cl>Sonic Unleashed Java</c> Sprites.
+
 # v1.1.2
 
 - <cg>Added</c> new <cy>Extra Settings!</c>
