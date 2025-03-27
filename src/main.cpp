@@ -14,7 +14,7 @@ auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
 auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
 auto sonicBall = Mod::get()->getSettingValue<bool>("sonic-ball");
 auto sonicCube = Mod::get()->getSettingValue<bool>("sonic-cube");
-auto cubeJumpSFX = Mod::get()->getSettingValue<bool>("cubejump-sfx");
+auto cubeJumpSFX = Mod::get()->getSettingValue<std::string>("cubejump-sfx");
 auto dynamicCubeRot = Mod::get()->getSettingValue<bool>("cube-dynamicrotation");
 auto doIdleAnim = false;
 
