@@ -1,5 +1,7 @@
 # v1.1.3
 - <cg>Added</c> <cl>Sonic Unleashed Java</c> Sprites.
+- <co>Separated SFX settings from main Mod Soft-Toggle</c>, allowing you to use SFX while disabling the Sonic Sprites.
+- <cg>Added</c> an option to select a separate SFX to play in cube jump.
 
 # v1.1.2
 

@@ -242,11 +242,19 @@
 			"default": false,
 			"description": "Enables the Sonic Cube feature, which will also show Sonic in the cube gamemode. \n\n <cr>Although mostly functional, might cause some issues if enabled (mainly with player rotations on some very specific situations), aside from being overall confusing, since there won't be any noticeable difference between cube and Robot.</c> \n\n <cs>Use at your own risk!</c>"
 		},
+		"cube-dynamicrotation": {
+			"type": "bool",
+			"name": "Dynamic Cube Rotation",
+			"description": "Enables the Dynamic Cube Rotation feature, which will attempt to fix any rotation issues with Sonic Cube by updating its rotation on Player Update. \n\n <cs>Disabled by default since it might cause performance issues for some players, use at your own risk!</c>",
+			"enable-if": "sonic-cube",
+			"default": false
+		},
 		"cubejump-sfx": {
     		"type": "string",
     		"name": "Cube Jump SFX",
     		"description": "The Sound Effect to play on <cl>Cube Jump.</c>",
     		"default": "classic-jump",
+			"enable-if": "enable-sfx",
     		"one-of": ["none",
     			"classic-jump",
 				"cd-jump",

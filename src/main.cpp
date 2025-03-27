@@ -15,6 +15,7 @@ auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
 auto sonicBall = Mod::get()->getSettingValue<bool>("sonic-ball");
 auto sonicCube = Mod::get()->getSettingValue<bool>("sonic-cube");
 auto cubeJumpSFX = Mod::get()->getSettingValue<bool>("cubejump-sfx");
+auto dynamicCubeRot = Mod::get()->getSettingValue<bool>("cube-dynamicrotation");
 auto doIdleAnim = false;
 
 // Individual SFX settings
@@ -74,6 +75,9 @@ $on_mod(Loaded) {
     });
     listenForSettingChanges("cubejump-sfx", [](bool value) {
         cubeJumpSFX = value;
+    });
+    listenForSettingChanges("cube-dynamicrotation", [](bool value) {
+        dynamicCubeRot = value;
     });
 }
 
@@ -223,6 +227,28 @@ class $modify(PlayerObject) {
                     fields->m_customSprite->setVisible(true);
                     if (m_isCube && sonicCube) {
                         this->setRotation(0);
+                        if (dynamicCubeRot) {
+                            float scaleX = m_vehicleSize;
+                            float scaleY = m_vehicleSize;
+
+                            if (m_isUpsideDown && m_isSideways) {
+                                // Right (rotated 90deg)
+                                this->setScaleX(scaleX);
+                                this->setScaleY(scaleY);
+                            } else if (!m_isUpsideDown && m_isSideways) {
+                                // Left (rotated -90deg)
+                                this->setScaleX(-scaleX);
+                                this->setScaleY(scaleY);
+                            } else if (m_isUpsideDown && !m_isSideways) {
+                                // Upside down
+                                this->setScaleX(scaleX);
+                                this->setScaleY(-scaleY);
+                            } else {
+                                // Normal
+                                this->setScaleX(scaleX);
+                                this->setScaleY(scaleY);
+                            }
+                        }
                     }
 
                     if (m_isBall && sonicBall) {
@@ -390,7 +416,12 @@ class $modify(PlayerObject) {
 
         auto fields = m_fields.self();
         auto frameName = fmt::format("{}_sonicDeath_01.png"_spr, chosenGameSprite);
-        auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(0.75f, {0, -200}) );
+        auto deathAnim = CCEaseBackIn::create( CCMoveBy::create(0.75f, {0, -300}) );
+        auto goAwaySonic = CCSequence::create(
+            CCDelayTime::create(0.7f),
+            CCFadeOut::create(0.05f),
+            nullptr
+        );
         bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
         bool sonicBallDie = m_isBall && sonicBall;
@@ -401,6 +432,7 @@ class $modify(PlayerObject) {
         if (doDieAnim) {
             fields->m_customSprite->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str()));
             fields->m_customSprite->runAction(deathAnim);
+            fields->m_customSprite->runAction(goAwaySonic);
             if (!doDieAnim) {
                 fields->m_customSprite->setVisible(false);
             }
@@ -434,7 +466,7 @@ class $modify(PlayerObject) {
 
         bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
-        if (sonicCube && m_isCube) {
+        if (sonicCube && m_isCube && !dynamicCubeRot) {
             float scaleX = m_vehicleSize;
             float scaleY = m_vehicleSize;
 
