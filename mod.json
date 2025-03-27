@@ -27,8 +27,8 @@
     	},
     	"enable-sonicmod": {
     		"type": "bool",
-    		"name": "Enable Mod (READ INFO!!)",
-    		"description": "Allows for <cy>toggling</c> the mod's functions <cg>on</c>/<cr>off</c> without the need for disabling the entire mod and restarting the game. \n\n <co>Will need a level restart on change if</c> <cs>Allow Dynamic Soft-toggle update</c> <co>is disabled</c>! \n<cr>Please make sure to restart the level you're playing after switching this setting to avoid issues!!</c>",
+    		"name": "Enable Sonic Robot (READ INFO!!)",
+    		"description": "Allows for <cy>toggling</c> the mod's main function (Sonic in the Robot Gamemode) <cg>on</c>/<cr>off</c> without the need for disabling the entire mod and restarting the game. \n\n <co>Will need a level restart on change if</c> <cs>Allow Dynamic Soft-toggle update</c> <co>is disabled</c>! \n<cr>Please make sure to restart the level you're playing after switching this setting to avoid issues!!</c>",
     		"default": true
     	},
     	"selected-sprite": {
@@ -77,21 +77,20 @@
     		"type": "bool",
     		"name": "Enable SFX",
     		"description": "<cg>Enables</c> playing <cl>Sonic sound effects</c> on certain in-game events!",
-    		"enable-if": "enable-sonicmod",
     		"default": true
     	},
     	"global-sfx": {
     		"type": "bool",
     		"name": "Global SFX",
     		"description": "Defines whether or not should sound effects be played <cy>regardless of gamemode</c>.\n\n <cg>If on</c>, Sonic SFX will play on <cp>any gamemode</c>, <cr>if off</c> (by default) SFX will <cj>only play when in Robot gamemode</c>, aka, <cl>when Sonic is present.</c>",
-    		"enable-if": "enable-sfx && enable-sonicmod",
+    		"enable-if": "enable-sfx",
     		"default": false
     	},
 		"disable-inclassic": {
 			"type": "bool",
 			"name": "Disable SFX in Classic Mode",
 			"description": "Disables the Sonic SFX from playing when in Classic Mode.",
-			"enable-if": "enable-sfx && enable-sonicmod",
+			"enable-if": "enable-sfx",
 			"default": false
 		},
     	"jump-sfx": {
@@ -99,7 +98,7 @@
     		"name": "Jump SFX",
     		"description": "The Sound Effect to play on <cl>Robot Jump.</c>",
     		"default": "classic-jump",
-    		"enable-if": "enable-sfx && enable-sonicmod",
+    		"enable-if": "enable-sfx",
     		"one-of": ["none",
     			"classic-jump",
 				"cd-jump",
@@ -117,7 +116,7 @@
     		"name": "Orb SFX",
     		"description": "The Sound Effect to play on <cl>Orb use.</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx && enable-sonicmod",
+    		"enable-if": "enable-sfx",
     		"one-of": ["none",
     			"classic-bumper",
     			"classic-enemy-break",
@@ -140,7 +139,7 @@
     		"name": "Dash Orb Start SFX",
     		"description": "The Sound Effect to play when <cl>a dash orb is used.</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx && enable-sonicmod",
+    		"enable-if": "enable-sfx",
     		"one-of": ["none",
 				"classic-spin",
 				"cd-boost",
@@ -169,7 +168,7 @@
     		"name": "Dash Orb Stop SFX",
     		"description": "The Sound Effect to play when <cl>a dash orb is released.</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx && enable-sonicmod",
+    		"enable-if": "enable-sfx",
     		"one-of": ["none",
 				"classic-spindash-release",
 				"classic-suddenstop",
@@ -186,7 +185,7 @@
     		"name": "Pad SFX",
     		"description": "The Sound Effect to play when <cl>a bump pad is used.</c> \n\n <co>(Doesn't play on Spider & Blue pads)</c>",
     		"default": "none",
-    		"enable-if": "enable-sfx && enable-sonicmod",
+    		"enable-if": "enable-sfx",
     		"one-of": ["none",
 				"classic-spring",
 				"cd-spring",
@@ -243,13 +242,23 @@
 			"default": false,
 			"description": "Enables the Sonic Cube feature, which will also show Sonic in the cube gamemode. \n\n <cr>Although mostly functional, might cause some issues if enabled (mainly with player rotations on some very specific situations), aside from being overall confusing, since there won't be any noticeable difference between cube and Robot.</c> \n\n <cs>Use at your own risk!</c>"
 		},
-		"jumpsfx-incube": {
-			"type": "bool",
-			"name": "Jump SFX in Cube",
-			"enable-if": "sonic-cube && enable-sfx",
-			"description": "Enables the Jump SFX to play in the cube gamemode if Sonic Cube is enabled. \n\n <cr>Can, obviously, get very annoying to hear the sound THAT much. Up to you if you want to enable it!</c>",
-			"default": false
-		}
+		"cubejump-sfx": {
+    		"type": "string",
+    		"name": "Cube Jump SFX",
+    		"description": "The Sound Effect to play on <cl>Cube Jump.</c>",
+    		"default": "classic-jump",
+    		"one-of": ["none",
+    			"classic-jump",
+				"cd-jump",
+				"adventure-jump",
+				"modern-jump",
+				"modern-jumponly",
+				"modern-spin",
+				"generations-jump",
+				"lostwrld-jump",
+				"lostwrld-jumponly",
+				"runners-jump"]
+    	}
     },
 	"id": "saritahhh.sonicrobotmod",
 	"name": "Sonic Robot",

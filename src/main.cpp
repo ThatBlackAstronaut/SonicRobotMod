@@ -14,7 +14,7 @@ auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
 auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
 auto sonicBall = Mod::get()->getSettingValue<bool>("sonic-ball");
 auto sonicCube = Mod::get()->getSettingValue<bool>("sonic-cube");
-auto jumpInCube = Mod::get()->getSettingValue<bool>("jumpsfx-incube");
+auto cubeJumpSFX = Mod::get()->getSettingValue<bool>("cubejump-sfx");
 auto doIdleAnim = false;
 
 // Individual SFX settings
@@ -72,8 +72,8 @@ $on_mod(Loaded) {
     listenForSettingChanges("sonic-cube", [](bool value) {
         sonicCube = value;
     });
-    listenForSettingChanges("jumpsfx-incube", [](bool value) {
-        jumpInCube = value;
+    listenForSettingChanges("cubejump-sfx", [](bool value) {
+        cubeJumpSFX = value;
     });
 }
 
@@ -418,7 +418,7 @@ class $modify(PlayerObject) {
             sfxToPlayDashStart = "none.ogg"_spr;
         }
 
-        if (isModEnabled && enableSounds){
+        if (enableSounds){
             if (!globalSounds){
                 if (m_isRobot){
                     fmod->playEffect(sfxToPlayDashStart);
@@ -492,6 +492,7 @@ class $modify(PlayerObject) {
         auto fmod = FMODAudioEngine::sharedEngine();
         auto sfxToPlayJump = fmt::format("{}.ogg"_spr, selectedJumpSound);
         auto sfxToPlayOrb = fmt::format("{}.ogg"_spr, selectedOrbSound);
+        auto sfxToPlayCubeJump = fmt::format("{}.ogg"_spr, cubeJumpSFX);
         bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
         if (disableInClassic && !m_isPlatformer) {
@@ -499,13 +500,13 @@ class $modify(PlayerObject) {
             sfxToPlayOrb = "none.ogg"_spr;
         }
 
-        if (isModEnabled && enableSounds && PlayLayer::get()){
+        if (enableSounds && PlayLayer::get()){
             if (!m_ringJumpRelated){
                 if (m_isRobot){
-                    fmod->playEffect(sfxToPlayJump);
+                    fmod->playEffect(sfxToPlayCubeJump);
                 }
                 // Sonic Cube jump SFX
-                if (sonicCube && m_isCube && jumpInCube) {
+                if (sonicCube && m_isCube) {
                     fmod->playEffect(sfxToPlayJump);
                 }
             } else {
