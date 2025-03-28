@@ -1,10 +1,12 @@
 # v1.1.3
-- <cg>Added</c> <cl>Sonic Unleashed Java</c> Sprites.
+- <cg>Added</c> <cy>New Characters</c>:
+    - Added <cl>Sonic Unleashed Java</c>
+    - Added <cb>Modern Sonic</c> (S3&K style - 2 jump variants)
 - <co>Separated SFX settings from main Mod Soft-Toggle</c>, allowing you to use SFX while disabling the Sonic Sprites.
 - <cg>Added</c> an option to select a separate SFX to play in cube jump.
+- Potentially <co>Fixed rotation issues with the Sonic Cube Feature</c>
 
 # v1.1.2
-
 - <cg>Added</c> new <cy>Extra Settings!</c>
     - <cg>Added</c> <cj>Sonic Ball:</c> Shows Sonic's rolling sprite when in the ball gamemode! (Disabled by default)
     - <cg>Added</c> <cj>Sonic Cube:</c> Allows Sonic to replace the Cube gamemode too! Visually works the same as the Robot mode, animations and all! (Disabled by default)

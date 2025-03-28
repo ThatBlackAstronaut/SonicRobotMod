@@ -14,12 +14,11 @@ auto enableSounds = Mod::get()->getSettingValue<bool>("enable-sfx");
 auto globalSounds = Mod::get()->getSettingValue<bool>("global-sfx");
 auto sonicBall = Mod::get()->getSettingValue<bool>("sonic-ball");
 auto sonicCube = Mod::get()->getSettingValue<bool>("sonic-cube");
-auto cubeJumpSFX = Mod::get()->getSettingValue<std::string>("cubejump-sfx");
-auto dynamicCubeRot = Mod::get()->getSettingValue<bool>("cube-dynamicrotation");
 auto doIdleAnim = false;
 
 // Individual SFX settings
 auto selectedJumpSound = Mod::get()->getSettingValue<std::string>("jump-sfx");
+auto cubeJumpSFX = Mod::get()->getSettingValue<std::string>("cubejump-sfx");
 auto selectedOrbSound = Mod::get()->getSettingValue<std::string>("orb-sfx");
 auto selectedDashStartSound = Mod::get()->getSettingValue<std::string>("dash-start-sfx");
 auto selectedDashStopSound = Mod::get()->getSettingValue<std::string>("dash-stop-sfx");
@@ -75,9 +74,6 @@ $on_mod(Loaded) {
     });
     listenForSettingChanges("cubejump-sfx", [](bool value) {
         cubeJumpSFX = value;
-    });
-    listenForSettingChanges("cube-dynamicrotation", [](bool value) {
-        dynamicCubeRot = value;
     });
 }
 
@@ -227,28 +223,6 @@ class $modify(PlayerObject) {
                     fields->m_customSprite->setVisible(true);
                     if (m_isCube && sonicCube) {
                         this->setRotation(0);
-                        if (dynamicCubeRot) {
-                            float scaleX = m_vehicleSize;
-                            float scaleY = m_vehicleSize;
-
-                            if (m_isUpsideDown && m_isSideways) {
-                                // Right (rotated 90deg)
-                                this->setScaleX(scaleX);
-                                this->setScaleY(scaleY);
-                            } else if (!m_isUpsideDown && m_isSideways) {
-                                // Left (rotated -90deg)
-                                this->setScaleX(-scaleX);
-                                this->setScaleY(scaleY);
-                            } else if (m_isUpsideDown && !m_isSideways) {
-                                // Upside down
-                                this->setScaleX(scaleX);
-                                this->setScaleY(-scaleY);
-                            } else {
-                                // Normal
-                                this->setScaleX(scaleX);
-                                this->setScaleY(scaleY);
-                            }
-                        }
                     }
 
                     if (m_isBall && sonicBall) {
@@ -378,6 +352,36 @@ class $modify(PlayerObject) {
         }
     }
 
+    void hitGround(GameObject* p0, bool p1) {
+        PlayerObject::hitGround(p0, p1);
+        auto fields = m_fields.self();
+
+        bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
+
+        if (sonicCube && m_isCube) {
+            float scaleX = m_vehicleSize;
+            float scaleY = m_vehicleSize;
+
+            if (m_isUpsideDown && m_isSideways) {
+                // Right (rotated 90deg)
+                this->setScaleX(scaleX);
+                this->setScaleY(scaleY);
+            } else if (!m_isUpsideDown && m_isSideways) {
+                // Left (rotated -90deg)
+                this->setScaleX(-scaleX);
+                this->setScaleY(scaleY);
+            } else if (m_isUpsideDown && !m_isSideways) {
+                // Upside down
+                this->setScaleX(scaleX);
+                this->setScaleY(-scaleY);
+            } else {
+                // Normal
+                this->setScaleX(scaleX);
+                this->setScaleY(scaleY);
+            }
+        }
+    }
+
     void bumpPlayer(float p0, int p1, bool p2, GameObject* p3) {
         PlayerObject::bumpPlayer(p0, p1, p2, p3);
 
@@ -466,7 +470,7 @@ class $modify(PlayerObject) {
 
         bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
 
-        if (sonicCube && m_isCube && !dynamicCubeRot) {
+        if (sonicCube && m_isCube) {
             float scaleX = m_vehicleSize;
             float scaleY = m_vehicleSize;
 
@@ -535,11 +539,11 @@ class $modify(PlayerObject) {
         if (enableSounds && PlayLayer::get()){
             if (!m_ringJumpRelated){
                 if (m_isRobot){
-                    fmod->playEffect(sfxToPlayCubeJump);
+                    fmod->playEffect(sfxToPlayJump);
                 }
                 // Sonic Cube jump SFX
-                if (sonicCube && m_isCube) {
-                    fmod->playEffect(sfxToPlayJump);
+                if (m_isCube) {
+                    fmod->playEffect(sfxToPlayCubeJump);
                 }
             } else {
                 if (m_ringJumpRelated){
