@@ -498,29 +498,29 @@ class $modify(PlayerObject) {
     void stopDashing(){
         PlayerObject::stopDashing();
 
-        if (isModEnabled){
-            auto fields = m_fields.self();
+        auto fields = m_fields.self();
+        auto fmod = FMODAudioEngine::sharedEngine();
+        auto sfxToPlayDashStop = fmt::format("{}.ogg"_spr, selectedDashStopSound);
 
-            fields->m_customSprite->stopAllActions();
-            fields->m_customSprite->setPosition({0,0});
-            fields->m_customSprite->setOpacity(255);
-
-            auto fmod = FMODAudioEngine::sharedEngine();
-            auto sfxToPlayDashStop = fmt::format("{}.ogg"_spr, selectedDashStopSound);
-
+        if (enableSounds){
             if (disableInClassic && !m_isPlatformer) {
                 sfxToPlayDashStop = "none.ogg"_spr;
             }
 
-            if (enableSounds){
-                if (!globalSounds){
-                    if (m_isRobot){
-                        fmod->playEffect(sfxToPlayDashStop);
-                    }
-                } else {
+            if (!globalSounds){
+                if (m_isRobot){
                     fmod->playEffect(sfxToPlayDashStop);
                 }
+            } else {
+                fmod->playEffect(sfxToPlayDashStop);
             }
+        }
+
+        if (isModEnabled){
+
+            fields->m_customSprite->stopAllActions();
+            fields->m_customSprite->setPosition({0,0});
+            fields->m_customSprite->setOpacity(255);
         }
     }
 
