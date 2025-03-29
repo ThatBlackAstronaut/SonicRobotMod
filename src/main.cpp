@@ -503,6 +503,7 @@ class $modify(PlayerObject) {
 
             fields->m_customSprite->stopAllActions();
             fields->m_customSprite->setPosition({0,0});
+            fields->m_customSprite->setOpacity(255);
 
             auto fmod = FMODAudioEngine::sharedEngine();
             auto sfxToPlayDashStop = fmt::format("{}.ogg"_spr, selectedDashStopSound);
