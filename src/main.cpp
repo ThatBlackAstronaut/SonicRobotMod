@@ -385,30 +385,31 @@ class $modify(PlayerObject) {
     void bumpPlayer(float p0, int p1, bool p2, GameObject* p3) {
         PlayerObject::bumpPlayer(p0, p1, p2, p3);
 
-        if (isModEnabled) {
-            auto fields = m_fields.self();
-            auto fmod = FMODAudioEngine::sharedEngine();
-            auto sfxToPlay = fmt::format("{}.ogg"_spr, selectedPadSound);
-            bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
-            bool validCube = sonicCube && m_isCube;
-            bool doBump = m_isRobot || validCube;
+        auto fields = m_fields.self();
+        auto fmod = FMODAudioEngine::sharedEngine();
+        auto sfxToPlay = fmt::format("{}.ogg"_spr, selectedPadSound);
+        bool m_isCube = !m_isShip && !m_isBird && !m_isBall && !m_isDart && !m_isRobot && !m_isSpider && !m_isSwing;
+        bool validCube = sonicCube && m_isCube;
+        bool doBump = m_isRobot || validCube;
 
+        if (enableSounds) {
             if (disableInClassic && !m_isPlatformer) {
                 sfxToPlay = "none.ogg"_spr;
             }
 
-            if (doBump && fields->m_customSprite) {
-                fields->m_bumpTimer = 12.5f; 
-            }
-
-            if (enableSounds) {
-                if (!globalSounds){
-                    if (m_isRobot){
-                        fmod->playEffect(sfxToPlay);
-                    }
-                } else {
+            if (!globalSounds){
+                if (m_isRobot){
                     fmod->playEffect(sfxToPlay);
                 }
+            } else {
+                fmod->playEffect(sfxToPlay);
+            }
+        }
+
+        if (isModEnabled) {
+
+            if (doBump && fields->m_customSprite) {
+                fields->m_bumpTimer = 12.5f; 
             }
 
         }
