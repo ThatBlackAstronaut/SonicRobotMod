@@ -18,6 +18,10 @@ jobs:
         - name: macOS
           os: macos-latest
 
+        - name: iOS
+          os: macos-latest
+          target: iOS
+
         # goodnight, sweet prince
         # i am NOT bothering with fixing android32
         # like 3 ppl use it anyways
@@ -40,8 +44,7 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          bindings: geode-sdk/bindings
-          bindings-ref: main
+          sdk: nightly
           combine: true
           target: ${{ matrix.config.target }}
 
